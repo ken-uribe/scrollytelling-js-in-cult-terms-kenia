@@ -1,3 +1,5 @@
+GitHub Pages: https://ken-uribe.github.io/scrollytelling-js-in-cult-terms-kenia/
+
 # Project 2 Student Hub: Lost in the Scroll
 
 Student-facing repo for final project execution and turn-in.
