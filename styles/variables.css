@@ -1,46 +1,96 @@
 :root {
-    /* Brand colors */
-    --color-red: #d2071f;
-    --color-cream: #efe4cb;
-    --color-ink: #0e0e18;
 
-    /* Text and surfaces */
-    --color-text-primary: var(--color-ink);
-    --color-text-inverse: var(--color-cream);
-    --color-surface-primary: var(--color-red);
-    --color-surface-contrast: var(--color-ink);
+/* ========================
+   PRIMITIVE COLOR TOKENS
+======================== */
 
-    /* Typography */
-    --font-display: "Chelsea Market", cursive;
-    --font-size-hero-primary: 96px;
-    --font-size-hero-secondary: 48px;
-    --font-size-hero-primary-tablet: 72px;
-    --font-size-hero-secondary-tablet: 36px;
-    --font-size-hero-primary-mobile: 48px;
-    --font-size-hero-secondary-mobile: 28px;
-    --font-size-hero-primary-mobile-sm: 36px;
-    --font-size-hero-secondary-mobile-sm: 20px;
-    --font-size-hero-primary-xl: 120px;
-    --font-size-hero-secondary-xl: 60px;
-    --line-height-tight: 1.2;
-    --font-weight-regular: 400;
+/* Neutrals */
+--neutral-0: #ffffff;
+--neutral-100: #efe4cb;
+--neutral-200: #d3c2a0;
+--neutral-300: #9c8a81;
+--neutral-400: #77635f;
+--neutral-500: #3a1f26;
+--neutral-600: #0e0e18;
 
-    /* Layout */
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-4: 1rem;
-    --space-6: 1.5rem;
-    --space-8: 2rem;
-    --hero-min-height: 100vh;
-    --content-max-width: 100%;
+/* Teals */
+--teal-100: #bfdfd4;
+--teal-200: #98ccb5;
+--teal-300: #0ab395;
+--teal-400: #009f83;
+--teal-500: #00816a;
 
-    /* Effects */
-    --hero-svg-opacity: 0.6;
-    --text-shadow-soft: 2px 2px 4px rgb(0 0 0 / 20%);
+/* Reds */
+--red-100: #e89498;
+--red-200: #ed414d;
+--red-300: #d2071f;
+--red-400: #a6180f;
+--red-500: #570500;
 
-    /* Breakpoints */
-    --breakpoint-sm: 480px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 1024px;
-    --breakpoint-xl: 1920px;
+/* Purples */
+--purple-100: #e7c0df;
+--purple-200: #bc59a7;
+--purple-300: #843974;
+--purple-400: #761449;
+--purple-500: #3c0020;
+
+/* Blues */
+--blue-100: #8293d9;
+--blue-200: #5567b3;
+--blue-300: #37478a;
+--blue-400: #112165;
+--blue-500: #000b39;
+
+/* ========================
+   SEMANTIC COLOR TOKENS
+======================== */
+
+--color-background-primary: var(--neutral-100);
+--color-background-secondary: var(--neutral-600);
+
+--color-text-primary: var(--neutral-600);
+--color-text-secondary: var(--neutral-400);
+
+--color-accent-primary: var(--teal-300);
+
+--color-danger: var(--red-300);
+--color-highlight: var(--purple-300);
+--color-info: var(--blue-300);
+
+/* ========================
+   TYPOGRAPHY TOKENS
+======================== */
+
+--font-display: "Chelsea Market", sans-serif;
+--font-body: "Josefin Sans", sans-serif;
+
+--font-size-title: 96px;
+--font-size-heading: 48px;
+--font-size-body: 18px;
+--font-size-caption: 12px;
+
+--font-weight-regular: 400;
+--font-weight-medium: 500;
+--font-weight-bold: 700;
+
+/* ========================
+   SPACING TOKENS
+======================== */
+
+--space-xs: 8px;
+--space-sm: 16px;
+--space-md: 24px;
+--space-lg: 32px;
+--space-xl: 40px;
+--space-2xl: 56px;
+--space-3xl: 72px;
+
+[data-theme="dark"] {
+
+--color-background-primary: var(--neutral-600);
+--color-background-secondary: var(--neutral-500);
+
+--color-text-primary: var(--neutral-0);
+--color-text-secondary: var(--neutral-200);
+
 }
