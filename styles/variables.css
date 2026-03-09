@@ -85,6 +85,8 @@
 --space-2xl: 56px;
 --space-3xl: 72px;
 
+}
+
 [data-theme="dark"] {
 
 --color-background-primary: var(--neutral-600);

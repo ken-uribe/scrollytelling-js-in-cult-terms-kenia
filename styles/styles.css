@@ -1,3 +1,5 @@
+@import url("./variables.css");
+
 /* ================================
    Reset & Base Styles
    ================================ */
@@ -14,8 +16,9 @@ body {
 }
 
 body {
-    font-family: 'Chelsea Market', cursive;
-    background-color: none;
+    font-family: var(--font-display);
+    background-color: var(--color-background-primary);
+    color: var(--color-text-primary);
 }
 
 /* ================================
@@ -25,7 +28,7 @@ body {
     position: relative;
     width: 100%;
     min-height: 100vh;
-    background-color: #D2071F;
+    background-color: var(--color-danger);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,7 +51,7 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
-    color: #0E0E18;
+    color: var(--color-background-secondary);
 }
 
 /* Content Container */
@@ -56,32 +59,32 @@ body {
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: 2rem;
+    padding: var(--space-lg);
     max-width: 100%;
 }
 
 /* Title Styles */
 .hero-title {
-    font-family: 'Chelsea Market', cursive;
+    font-family: var(--font-display);
     line-height: 1.2;
     word-wrap: break-word;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--space-xs);
 }
 
 /* Primary title spans (JS Concepts, Cult of the Lamb) */
 .hero-title--primary {
-    font-size: 96px;
-    color: #EFE4CB;
-    font-weight: 400;
+    font-size: var(--font-size-title);
+    color: var(--neutral-100);
+    font-weight: var(--font-weight-regular);
 }
 
 /* Secondary title spans (Explained, Terms) */
 .hero-title--secondary {
-    font-size: 48px;
-    color: #D2071F;
-    font-weight: 400;
+    font-size: var(--font-size-heading);
+    color: var(--color-danger);
+    font-weight: var(--font-weight-regular);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -107,7 +110,7 @@ body {
     }
 
     .hero-content {
-        padding: 1.5rem;
+        padding: var(--space-md);
     }
 
     .hero-title--primary {
@@ -130,7 +133,7 @@ body {
     }
 
     .hero-content {
-        padding: 1rem;
+        padding: var(--space-sm);
     }
 }
 
