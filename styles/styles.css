@@ -1,3 +1,5 @@
+@import url("./variables.css");
+
 /* ================================
    Reset & Base Styles
    ================================ */
@@ -14,8 +16,8 @@ body {
 }
 
 body {
-    font-family: 'Chelsea Market', cursive;
-    background-color: none;
+    font-family: var(--font-display);
+    background-color: transparent;
 }
 
 /* ================================
@@ -24,8 +26,8 @@ body {
 .hero {
     position: relative;
     width: 100%;
-    min-height: 100vh;
-    background-color: #D2071F;
+    min-height: var(--hero-min-height);
+    background-color: var(--color-surface-primary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,7 +42,7 @@ body {
     width: 150%;
     height: 100%;
     z-index: 1;
-    opacity: 0.6;
+    opacity: var(--hero-svg-opacity);
 }
 
 .hero-svg-image {
@@ -48,7 +50,7 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
-    color: #0E0E18;
+    color: var(--color-surface-contrast);
 }
 
 /* Content Container */
@@ -56,33 +58,33 @@ body {
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: 2rem;
-    max-width: 100%;
+    padding: var(--space-8);
+    max-width: var(--content-max-width);
 }
 
 /* Title Styles */
 .hero-title {
-    font-family: 'Chelsea Market', cursive;
-    line-height: 1.2;
+    font-family: var(--font-display);
+    line-height: var(--line-height-tight);
     word-wrap: break-word;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--space-2);
 }
 
 /* Primary title spans (JS Concepts, Cult of the Lamb) */
 .hero-title--primary {
-    font-size: 96px;
-    color: #EFE4CB;
-    font-weight: 400;
+    font-size: var(--font-size-hero-primary);
+    color: var(--color-text-inverse);
+    font-weight: var(--font-weight-regular);
 }
 
 /* Secondary title spans (Explained, Terms) */
 .hero-title--secondary {
-    font-size: 48px;
-    color: #D2071F;
-    font-weight: 400;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: var(--font-size-hero-secondary);
+    color: var(--color-surface-primary);
+    font-weight: var(--font-weight-regular);
+    text-shadow: var(--text-shadow-soft);
 }
 
 /* ================================
@@ -92,56 +94,56 @@ body {
 /* Tablets and smaller devices */
 @media (max-width: 1024px) {
     .hero-title--primary {
-        font-size: 72px;
+        font-size: var(--font-size-hero-primary-tablet);
     }
 
     .hero-title--secondary {
-        font-size: 36px;
+        font-size: var(--font-size-hero-secondary-tablet);
     }
 }
 
 /* Mobile devices */
 @media (max-width: 768px) {
     .hero {
-        min-height: 100vh;
+        min-height: var(--hero-min-height);
     }
 
     .hero-content {
-        padding: 1.5rem;
+        padding: var(--space-6);
     }
 
     .hero-title--primary {
-        font-size: 48px;
+        font-size: var(--font-size-hero-primary-mobile);
     }
 
     .hero-title--secondary {
-        font-size: 28px;
+        font-size: var(--font-size-hero-secondary-mobile);
     }
 }
 
 /* Small mobile devices */
 @media (max-width: 480px) {
     .hero-title--primary {
-        font-size: 36px;
+        font-size: var(--font-size-hero-primary-mobile-sm);
     }
 
     .hero-title--secondary {
-        font-size: 20px;
+        font-size: var(--font-size-hero-secondary-mobile-sm);
     }
 
     .hero-content {
-        padding: 1rem;
+        padding: var(--space-4);
     }
 }
 
 /* Large screens */
 @media (min-width: 1920px) {
     .hero-title--primary {
-        font-size: 120px;
+        font-size: var(--font-size-hero-primary-xl);
     }
 
     .hero-title--secondary {
-        font-size: 60px;
+        font-size: var(--font-size-hero-secondary-xl);
     }
 }
 

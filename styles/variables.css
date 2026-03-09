@@ -1,0 +1,46 @@
+:root {
+    /* Brand colors */
+    --color-red: #d2071f;
+    --color-cream: #efe4cb;
+    --color-ink: #0e0e18;
+
+    /* Text and surfaces */
+    --color-text-primary: var(--color-ink);
+    --color-text-inverse: var(--color-cream);
+    --color-surface-primary: var(--color-red);
+    --color-surface-contrast: var(--color-ink);
+
+    /* Typography */
+    --font-display: "Chelsea Market", cursive;
+    --font-size-hero-primary: 96px;
+    --font-size-hero-secondary: 48px;
+    --font-size-hero-primary-tablet: 72px;
+    --font-size-hero-secondary-tablet: 36px;
+    --font-size-hero-primary-mobile: 48px;
+    --font-size-hero-secondary-mobile: 28px;
+    --font-size-hero-primary-mobile-sm: 36px;
+    --font-size-hero-secondary-mobile-sm: 20px;
+    --font-size-hero-primary-xl: 120px;
+    --font-size-hero-secondary-xl: 60px;
+    --line-height-tight: 1.2;
+    --font-weight-regular: 400;
+
+    /* Layout */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --hero-min-height: 100vh;
+    --content-max-width: 100%;
+
+    /* Effects */
+    --hero-svg-opacity: 0.6;
+    --text-shadow-soft: 2px 2px 4px rgb(0 0 0 / 20%);
+
+    /* Breakpoints */
+    --breakpoint-sm: 480px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1920px;
+}
