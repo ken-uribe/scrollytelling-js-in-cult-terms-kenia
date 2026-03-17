@@ -495,16 +495,23 @@ li {
 
 .dark-matter-2 {
   display: block;
-  width: calc(100vw + 12px);
+  width: 100vw;
   height: auto;
-  margin: var(--space-md) calc(50% - 50vw - 6px) 0;
+  margin: var(--space-md) calc(50% - 50vw) 0;
   color: var(--neutral-700);
   fill: currentColor;
   filter: drop-shadow(0 8px 18px var(--overlay-ink-25));
+  overflow: visible;
 }
 
 .dark-matter-2 .st0 {
   display: inline;
+}
+
+.dark-matter-2 #Horizontal_Black_matter {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: translateX(-1.2%) scaleX(1.14);
 }
 
 /* Cult red sections */
