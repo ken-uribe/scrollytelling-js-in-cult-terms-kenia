@@ -22,6 +22,98 @@ body {
 }
 
 /* ================================
+   Page Layout
+   ================================ */
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Every story section */
+
+.section {
+  width: 100%;
+  min-height: 100vh;
+  padding: var(--space-3xl) var(--space-md);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section__content {
+  width: min(720px, 90%);
+  margin-inline: auto;
+}
+
+.section__content > * + * {
+  margin-top: var(--space-md);
+}
+
+.section--events,
+.section--variables,
+.section--conditionals,
+.section--storage,
+.section--toggle {
+  background: var(--color-danger);
+  color: var(--neutral-100);
+}
+
+.section--conditionals {
+  position: relative;
+  flex-direction: column;
+  gap: var(--space-lg);
+  justify-content: center;
+  align-items: center;
+}
+
+.section--conditionals .section__content {
+  position: relative;
+  z-index: 2;
+  width: min(520px, 70%);
+  margin: 0;
+}
+
+.conditionals-stack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  width: min(900px, 90%);
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-heading);
+}
+
+p,
+li {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: 1.5;
+}
+
+.code {
+  font-family: monospace;
+  background: var(--overlay-ink-15);
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+}
+
+.ritual-ring-svg {
+  display: block;
+  width: min(100%, 720px);
+  height: auto;
+  margin: var(--space-md) auto;
+  fill: var(--neutral-100);
+}
+
+/* ================================
    Hero Section
    ================================ */
 .hero {
@@ -33,6 +125,7 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    padding: 0;
 }
 
 /* SVG Background Container */
@@ -52,6 +145,19 @@ body {
     object-fit: cover;
     display: block;
     color: var(--color-background-secondary);
+}
+
+/* Inline SVG Background */
+.hero-svg {
+    position: absolute;
+    top: -4%;
+    left: -4%;
+    width: 108%;
+    height: 120%;
+    z-index: 1;
+    fill: var(--neutral-600);
+    pointer-events: none;
+    display: block;
 }
 
 /* Content Container */
@@ -85,7 +191,229 @@ body {
     font-size: var(--font-size-heading);
     color: var(--color-danger);
     font-weight: var(--font-weight-regular);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 2px 2px 4px var(--overlay-ink-20);
+}
+
+/* ================================
+   Story Sections
+   ================================ */
+
+.section h2 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-heading);
+  margin-bottom: var(--space-md);
+}
+
+.section p {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  margin-bottom: var(--space-sm);
+}
+
+.section ul {
+  margin-bottom: var(--space-lg);
+  padding-left: var(--space-md);
+  font-family: var(--font-body);
+}
+
+.ritual-mater {
+  width: var(--size-ritual-meter);
+  display: block;
+  margin: var(--space-xl) auto;
+
+  filter:
+    drop-shadow(0 0 25px var(--overlay-ink-70))
+    drop-shadow(0 0 10px var(--overlay-ink-60));
+}
+
+.ritual-stack {
+  position: relative;
+  width: 60vw;
+  margin: var(--space-xl) 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#ritual-black-matter {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter:
+    drop-shadow(0 0 25px var(--overlay-ink-70))
+    drop-shadow(0 0 10px var(--overlay-ink-60));
+}
+
+.ritual-ring-art {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ritual-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: var(--space-md) auto 0;
+  padding: 0 var(--space-md);
+  border: 2px solid var(--color-accent-primary);
+  width: min(320px, 70vw);
+  height: calc(min(320px, 70vw) * 0.5);
+  background-color: var(--neutral-600);
+  color: var(--color-accent-primary);
+  font-family: var(--font-display);
+  font-size: var(--font-size-button);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  box-shadow:
+    0 8px 0 var(--overlay-ink-25),
+    0 12px 24px var(--overlay-ink-25),
+    0 24px 48px var(--overlay-ink-20),
+    0 0 28px var(--overlay-ink-30);
+}
+
+
+.variables-icons {
+  position: relative;
+  width: min(320px, 70vw);
+  aspect-ratio: 1 / 1;
+  margin: var(--space-lg) auto;
+}
+
+.variables-icon {
+  position: absolute;
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  filter: drop-shadow(0 2px 0 var(--overlay-ink-25));
+  transform: translate(-50%, -50%);
+}
+
+.variables-icon--faith {
+  background-image: var(--icon-faith);
+  left: 78%;
+  top: 52%;
+}
+
+.variables-icon--gold {
+  background-image: var(--icon-gold);
+  left: 36%;
+  top: 78%;
+}
+
+.variables-icon--hunger {
+  background-image: var(--icon-hunger);
+  left: 26%;
+  top: 24%;
+}
+
+.faith-meter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+  width: min(var(--size-faith-meter), 40vw);
+}
+
+.faith-meter-svg {
+  display: block;
+  height: clamp(var(--size-faith-meter-min-height), 55vh, var(--size-faith-meter-max-height));
+  width: auto;
+  max-width: min(var(--size-faith-meter), 70vw);
+  color: var(--neutral-600);
+}
+
+.faith-meter-svg path {
+  fill: currentColor;
+}
+
+.faith-meter-svg rect {
+  stroke: currentColor;
+}
+
+.rebellion-svg {
+  display: block;
+  width: min(220px, 45vw);
+  height: auto;
+  margin: 0 auto;
+  color: var(--color-text-primary);
+}
+
+.rebellion-svg path {
+  fill: currentColor;
+}
+
+.save-icon {
+  display: block;
+  width: min(260px, 60vw);
+  height: auto;
+  margin: var(--space-md) auto 0;
+  color: var(--neutral-700);
+}
+
+.cult-crown {
+  display: block;
+  width: min(33vw, 360px);
+  height: auto;
+  margin: var(--space-md) auto 0;
+  color: var(--neutral-700);
+}
+
+.night-mode-toggle {
+  display: block;
+  width: min(var(--size-toggle), 55vw);
+  height: auto;
+  margin: var(--space-md) auto 0;
+  color: var(--neutral-700);
+}
+
+.dark-matter-2 {
+  display: block;
+  width: 100vw;
+  height: auto;
+  margin: var(--space-md) calc(50% - 50vw) 0;
+  color: var(--neutral-700);
+  fill: currentColor;
+  filter: drop-shadow(0 8px 18px var(--overlay-ink-25));
+}
+
+.dark-matter-2 .st0 {
+  display: inline;
+}
+
+/* Cult red sections */
+
+.section--events,
+.section--variables,
+.section--conditionals,
+.section--storage,
+.section--toggle {
+  background: var(--color-danger);
+  color: var(--neutral-100);
+}
+
+/* Code blocks */
+
+.code {
+  font-family: monospace;
+  margin-top: var(--space-md);
+}
+
+/* Highlight text */
+
+.chapter-highlight {
+  margin-top: var(--space-lg);
+  font-size: var(--font-size-highlight);
 }
 
 /* ================================
@@ -156,4 +484,16 @@ body {
         animation: none !important;
         transition: none !important;
     }
+}
+
+@media (max-width: 768px) {
+
+  .section {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  h2 {
+    font-size: 32px;
+  }
+
 }

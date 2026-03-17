@@ -12,6 +12,7 @@
 --neutral-400: #77635f;
 --neutral-500: #3a1f26;
 --neutral-600: #0e0e18;
+--neutral-700: #000000;
 
 /* Teals */
 --teal-100: #bfdfd4;
@@ -84,6 +85,40 @@
 --space-xl: 40px;
 --space-2xl: 56px;
 --space-3xl: 72px;
+
+/* ========================
+   OVERLAY TOKENS
+======================== */
+
+--overlay-ink-15: rgba(0, 0, 0, 0.15);
+--overlay-ink-20: rgba(0, 0, 0, 0.2);
+--overlay-ink-25: rgba(0, 0, 0, 0.25);
+--overlay-ink-30: rgba(0, 0, 0, 0.3);
+--overlay-ink-60: rgba(0, 0, 0, 0.6);
+--overlay-ink-70: rgba(0, 0, 0, 0.7);
+
+/* ========================
+   UI TOKENS
+======================== */
+
+--radius-sm: 6px;
+--radius-lg: 18px;
+--font-size-button: 24px;
+--font-size-highlight: 22px;
+--size-icon-lg: 64px;
+--size-toggle: 220px;
+--size-ritual-meter: 260px;
+--size-faith-meter: 240px;
+--size-faith-meter-min-height: 240px;
+--size-faith-meter-max-height: 420px;
+
+/* ========================
+   ASSET TOKENS
+======================== */
+
+--icon-faith: url("../assets/icons/faith-icon.svg");
+--icon-gold: url("../assets/icons/gold-icon.svg");
+--icon-hunger: url("../assets/icons/hunger-icn.svg");
 
 [data-theme="dark"] {
 
