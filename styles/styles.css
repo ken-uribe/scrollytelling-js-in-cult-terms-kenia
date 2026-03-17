@@ -318,6 +318,18 @@ li {
   pointer-events: none;
 }
 
+.ritual-eye-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(30vw, 192px);
+  height: auto;
+  transform: translate(-57%, -56%);
+  z-index: 3;
+  color: var(--neutral-700);
+  pointer-events: none;
+}
+
 .ritual-button {
   display: flex;
   align-items: center;

@@ -107,6 +107,7 @@ function animateRitualBlackMatter() {
 
   gsap.to(ritualBlackMatter, {
     rotation: 90,
+    scale: 0.82,
     transformOrigin: "50% 50%",
     duration: 4.2,
     ease: "power1.inOut",
