@@ -149,7 +149,7 @@ li {
 .hero2-svg {
     z-index: 0;
     opacity: 0;
-    transform: translateX(calc(-50% + var(--drift-x, 0vw)));
+    transform: translateX(calc(-50% + var(--drift-x, 0vw))) scaleX(-1);
     animation: hero-svg-horizontal-drift 7.6s linear infinite;
     will-change: transform, opacity;
 }
