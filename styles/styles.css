@@ -457,7 +457,7 @@ li {
 
 .rebellion-svg {
   position: relative;
-  top: -120px;
+  top: -160px;
   display: block;
   width: min(220px, 45vw);
   height: auto;
@@ -495,9 +495,9 @@ li {
 
 .dark-matter-2 {
   display: block;
-  width: 100vw;
+  width: calc(100vw + 12px);
   height: auto;
-  margin: var(--space-md) calc(50% - 50vw) 0;
+  margin: var(--space-md) calc(50% - 50vw - 6px) 0;
   color: var(--neutral-700);
   fill: currentColor;
   filter: drop-shadow(0 8px 18px var(--overlay-ink-25));

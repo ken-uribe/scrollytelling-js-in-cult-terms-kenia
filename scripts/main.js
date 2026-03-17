@@ -251,9 +251,9 @@ function animateConditionalsTextOnScroll() {
         {
           scale: 4,
           ease: "none",
-          duration: 0.2
+          duration: 0.001
         },
-        0.8
+        1
       );
 
       conditionalsProgressTl.to(
@@ -272,7 +272,7 @@ function animateConditionalsTextOnScroll() {
           ease: "none",
           duration: 0.22
         },
-        0.8
+        1
       );
 
       conditionalsProgressTl.to(
@@ -283,7 +283,7 @@ function animateConditionalsTextOnScroll() {
           ease: "none",
           duration: 0.22
         },
-        0.8
+        1
       );
     }
   }
@@ -506,6 +506,21 @@ function animateRitualEyeTracking() {
   });
 }
 
+function animateDarkMatterTurbulence() {
+  const turbulence = document.querySelector("#turbulence");
+  if (!turbulence || typeof gsap === "undefined") {
+    return;
+  }
+
+  gsap.to(turbulence, {
+    attr: { baseFrequency: "0.02 0.05" },
+    duration: 2,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut"
+  });
+}
+
 animateHeroFlames();
 animateEventsHeadingOnScroll();
 animateHeroText();
@@ -520,3 +535,4 @@ animateRitualBlackMatterFlames();
 animateRitualBlackMatter2Flames();
 animateRitualBlackMatterImage();
 animateRitualEyeTracking();
+animateDarkMatterTurbulence();
