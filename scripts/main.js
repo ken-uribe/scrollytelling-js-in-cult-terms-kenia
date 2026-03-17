@@ -161,6 +161,31 @@ function animateVariablesBodyOnScroll() {
   }
 }
 
+function animateVariablesIconsOrbit() {
+  const variablesIconsWrap = document.querySelector(".variables-icons");
+  const variablesIcons = document.querySelectorAll(".variables-icons .variables-icon");
+  if (!variablesIconsWrap || !variablesIcons.length || typeof gsap === "undefined") {
+    return;
+  }
+
+  gsap.set(variablesIconsWrap, { transformOrigin: "50% 50%" });
+
+  gsap.to(variablesIconsWrap, {
+    rotation: 360,
+    duration: 12,
+    ease: "none",
+    repeat: -1
+  });
+
+  gsap.to(variablesIcons, {
+    rotation: -360,
+    duration: 12,
+    ease: "none",
+    repeat: -1,
+    transformOrigin: "50% 50%"
+  });
+}
+
 function setupRitualBlackMatter2Path() {
   const ritualBlackMatter2 = document.querySelector(".ritual-black-matter2");
   const sourcePath = document.querySelector("#ritual-black-matter-shape");
@@ -340,6 +365,7 @@ animateHeroText();
 animateEventsBodyOnScroll();
 animateVariablesHeadingOnScroll();
 animateVariablesBodyOnScroll();
+animateVariablesIconsOrbit();
 setupRitualBlackMatter2Path();
 animateRitualBlackMatter();
 animateRitualBlackMatterFlames();

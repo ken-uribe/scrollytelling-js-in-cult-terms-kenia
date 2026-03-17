@@ -120,7 +120,7 @@
 
 --icon-faith: url("../assets/icons/faith-icon.svg");
 --icon-gold: url("../assets/icons/gold-icon.svg");
---icon-hunger: url("../assets/icons/hunger-icn.svg");
+--icon-hunger: url("../assets/icons/hunger-icon.svg");
 }
 
 [data-theme="dark"] {
