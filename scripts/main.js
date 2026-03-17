@@ -186,6 +186,58 @@ function animateRitualBlackMatterFlames() {
   });
 }
 
+function animateRitualBlackMatterImage() {
+  const ritualBlackMatterImage = document.querySelector(".ritual-black-matter");
+  if (!ritualBlackMatterImage || typeof gsap === "undefined") {
+    return;
+  }
+
+  gsap.to(ritualBlackMatterImage, {
+    rotation: 360,
+    transformOrigin: "50% 50%",
+    duration: 14,
+    ease: "none",
+    repeat: -1
+  });
+}
+
+function animateRitualEyeTracking() {
+  const ritualEye = document.querySelector(".ritual-eye-animation");
+  const ritualStack = document.querySelector(".ritual-stack");
+  if (!ritualEye || !ritualStack || typeof gsap === "undefined") {
+    return;
+  }
+
+  const maxX = 18;
+  const maxY = 12;
+
+  gsap.set(ritualEye, {
+    xPercent: -57,
+    yPercent: -56,
+    x: 0,
+    y: 0,
+    transformOrigin: "50% 50%"
+  });
+
+  const xTo = gsap.quickTo(ritualEye, "x", { duration: 0.18, ease: "power3.out" });
+  const yTo = gsap.quickTo(ritualEye, "y", { duration: 0.18, ease: "power3.out" });
+
+  window.addEventListener("pointermove", (event) => {
+    const rect = ritualStack.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const normalizedX = (event.clientX - centerX) / (rect.width / 2);
+    const normalizedY = (event.clientY - centerY) / (rect.height / 2);
+
+    const targetX = gsap.utils.clamp(-maxX, maxX, normalizedX * maxX);
+    const targetY = gsap.utils.clamp(-maxY, maxY, normalizedY * maxY);
+
+    xTo(targetX);
+    yTo(targetY);
+  });
+}
+
 animateHeroFlames();
 animateEventsHeadingOnScroll();
 animateHeroText();
@@ -194,3 +246,5 @@ setupRitualBlackMatter2Path();
 animateRitualBlackMatter();
 animateRitualBlackMatterFlames();
 animateRitualBlackMatter2Flames();
+animateRitualBlackMatterImage();
+animateRitualEyeTracking();

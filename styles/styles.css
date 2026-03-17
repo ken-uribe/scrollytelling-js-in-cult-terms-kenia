@@ -291,7 +291,7 @@ li {
 
 .ritual-stack {
   position: relative;
-  width: 60vw;
+  width: 74vw;
   margin: var(--space-xl) 0;
   left: 50%;
   transform: translateX(-50%);
@@ -326,8 +326,8 @@ li {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 80%;
-  height: 80%;
+  width: 88%;
+  height: 88%;
   transform: translate(-50%, -50%);
   object-fit: contain;
   z-index: 2;
