@@ -59,8 +59,9 @@ function animateHeroText() {
 }
 
 function animateEventsBodyOnScroll() {
-  const eventsTextElements = document.querySelectorAll(".section--events p, .section--events ul");
-  if (!eventsTextElements.length || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+  const eventsTextElements = document.querySelectorAll(".section--events p:not(.code), .section--events ul");
+  const eventsCode = document.querySelector(".section--events .code");
+  if ((!eventsTextElements.length && !eventsCode) || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
     return;
   }
 
@@ -79,9 +80,43 @@ function animateEventsBodyOnScroll() {
       .to(element, { opacity: 1, ease: "none", duration: 0.5 })
       .to(element, { opacity: 0.25, ease: "none", duration: 0.25 });
   });
+
+  if (eventsCode) {
+    gsap.fromTo(
+      eventsCode,
+      { opacity: 0.25 },
+      {
+        opacity: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: eventsCode,
+          start: "top 92%",
+          end: "top 65%",
+          scrub: 1
+        }
+      }
+    );
+  }
+}
+
+function animateRitualBlackMatter() {
+  const ritualBlackMatter = document.querySelector("#ritual-black-matter");
+  if (!ritualBlackMatter || typeof gsap === "undefined") {
+    return;
+  }
+
+  gsap.to(ritualBlackMatter, {
+    rotation: 90,
+    transformOrigin: "50% 50%",
+    duration: 4.2,
+    ease: "power1.inOut",
+    yoyo: true,
+    repeat: -1
+  });
 }
 
 animateHeroFlames();
 animateEventsHeadingOnScroll();
 animateHeroText();
 animateEventsBodyOnScroll();
+animateRitualBlackMatter();
