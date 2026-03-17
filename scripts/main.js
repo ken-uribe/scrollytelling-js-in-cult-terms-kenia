@@ -184,6 +184,25 @@ function animateVariablesIconsOrbit() {
     repeat: -1,
     transformOrigin: "50% 50%"
   });
+
+  const orbitDuration = 12;
+  const topSpacing = orbitDuration / variablesIcons.length;
+
+  variablesIcons.forEach((icon, index) => {
+    gsap.fromTo(
+      icon,
+      { scale: 1.52 },
+      {
+        scale: 1,
+        duration: orbitDuration / 2,
+        yoyo: true,
+        repeat: -1,
+        delay: index * topSpacing,
+        ease: "sine.inOut",
+        transformOrigin: "50% 50%"
+      }
+    );
+  });
 }
 
 function setupRitualBlackMatter2Path() {

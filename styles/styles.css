@@ -379,7 +379,7 @@ li {
 
 .variables-icons {
   position: relative;
-  width: min(320px, 70vw);
+  width: min(360px, 78vw);
   aspect-ratio: 1 / 1;
   margin: var(--space-lg) auto;
 }
@@ -397,32 +397,32 @@ li {
 
 .variables-icon--faith {
   background-image: var(--icon-faith);
-  left: 19%;
-  top: 32%;
+  left: 10%;
+  top: 25%;
 }
 
 .variables-icon--gold {
   background-image: var(--icon-gold);
-  left: 31%;
-  top: 74%;
+  left: 25%;
+  top: 87%;
 }
 
 .variables-icon--hunger {
   background-image: var(--icon-hunger);
   left: 50%;
-  top: 14%;
+  top: 2%;
 }
 
 .variables-icon--health {
   background-image: var(--icon-health);
-  left: 69%;
-  top: 74%;
+  left: 75%;
+  top: 87%;
 }
 
 .variables-icon--church {
   background-image: var(--icon-church);
-  left: 81%;
-  top: 32%;
+  left: 90%;
+  top: 25%;
 }
 
 .faith-meter {
