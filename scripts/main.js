@@ -219,6 +219,10 @@ function animateRitualEyeTracking() {
     y: 0,
     transformOrigin: "50% 50%"
   });
+  gsap.set(ritualEye, {
+    scale: 1,
+    transformOrigin: "50% 50%"
+  });
 
   const xTo = gsap.quickTo(ritualPupil, "x", { duration: 0.2, ease: "power3.out" });
   const yTo = gsap.quickTo(ritualPupil, "y", { duration: 0.2, ease: "power3.out" });
@@ -251,6 +255,12 @@ function animateRitualEyeTracking() {
     ritualIsActive = !ritualIsActive;
     ritualButton.textContent = ritualIsActive ? "End Ritual" : "Begin ritual";
     ritualButton.setAttribute("aria-pressed", ritualIsActive ? "true" : "false");
+
+    gsap.to(ritualEye, {
+      scale: ritualIsActive ? 1.2 : 1,
+      duration: 0.35,
+      ease: "power2.out"
+    });
 
     if (!ritualIsActive) {
       xTo(0);
