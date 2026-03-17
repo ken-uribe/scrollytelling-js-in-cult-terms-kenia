@@ -445,8 +445,14 @@ li {
   fill: currentColor;
 }
 
-.faith-meter-svg rect {
+.faith-meter-fill {
+  fill: var(--color-accent-primary);
+  opacity: 0.9;
+}
+
+.faith-meter-outline {
   stroke: currentColor;
+  fill: none;
 }
 
 .rebellion-svg {

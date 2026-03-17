@@ -161,6 +161,113 @@ function animateVariablesBodyOnScroll() {
   }
 }
 
+function animateConditionalsTextOnScroll() {
+  const conditionalsSection = document.querySelector(".section--conditionals");
+  const conditionalsStack = document.querySelector(".section--conditionals .conditionals-stack");
+  const conditionalText = document.querySelectorAll(".section--conditionals .section__content h2, .section--conditionals .section__content ul, .section--conditionals .section__content p");
+  const faithMeter = document.querySelector(".section--conditionals .faith-meter");
+  const faithMeterFill = document.querySelector(".section--conditionals .faith-meter-fill");
+  const rebellionSvg = document.querySelector(".section--conditionals .rebellion-svg");
+  if (!conditionalText.length || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+  const pinDistance = 180;
+
+  if (conditionalsSection && conditionalsStack) {
+    ScrollTrigger.create({
+      trigger: conditionalsSection,
+      start: "top top",
+      end: `+=${pinDistance}%`,
+      pin: conditionalsStack,
+      pinSpacing: true
+    });
+  }
+
+  conditionalText.forEach((element) => {
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: element,
+        start: "top 92%",
+        end: "top 40%",
+        scrub: 1.4
+      }
+    })
+      .fromTo(element, { opacity: 0.2, y: 40 }, { opacity: 1, y: 0, ease: "none", duration: 0.4 })
+      .to(element, { opacity: 1, y: 0, ease: "none", duration: 0.6 });
+  });
+
+  if (faithMeter) {
+    gsap.fromTo(
+      faithMeter,
+      { xPercent: 40, opacity: 0 },
+      {
+        xPercent: 0,
+        opacity: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".section--conditionals .section__content",
+          start: "top 62%",
+          end: "top 42%",
+          scrub: 1.2
+        }
+      }
+    );
+  }
+
+  if (faithMeterFill) {
+    if (rebellionSvg) {
+      gsap.set(rebellionSvg, {
+        autoAlpha: 0,
+        scale: 1,
+        transformOrigin: "50% 50%"
+      });
+    }
+
+    const conditionalsProgressTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".section--conditionals",
+        start: "top top",
+        end: `+=${pinDistance}%`,
+        scrub: 1.2
+      }
+    });
+
+    conditionalsProgressTl.to(
+      faithMeterFill,
+      {
+        attr: { y: 2, height: 332 },
+        ease: "none",
+        duration: 1
+      },
+      0
+    );
+
+    if (rebellionSvg) {
+      conditionalsProgressTl.to(
+        rebellionSvg,
+        {
+          autoAlpha: 1,
+          ease: "none",
+          duration: 0.001
+        },
+        0.5
+      );
+
+      conditionalsProgressTl.to(
+        rebellionSvg,
+        {
+          scale: 4,
+          ease: "none",
+          duration: 0.2
+        },
+        0.8
+      );
+    }
+  }
+}
+
 function animateVariablesIconsOrbit() {
   const variablesIconsWrap = document.querySelector(".variables-icons");
   const variablesIcons = document.querySelectorAll(".variables-icons .variables-icon");
@@ -384,6 +491,7 @@ animateHeroText();
 animateEventsBodyOnScroll();
 animateVariablesHeadingOnScroll();
 animateVariablesBodyOnScroll();
+animateConditionalsTextOnScroll();
 animateVariablesIconsOrbit();
 setupRitualBlackMatter2Path();
 animateRitualBlackMatter();
