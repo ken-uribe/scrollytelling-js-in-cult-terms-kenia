@@ -99,6 +99,68 @@ function animateEventsBodyOnScroll() {
   }
 }
 
+function animateVariablesHeadingOnScroll() {
+  const variablesHeading = document.querySelector(".section--variables h2");
+  if (!variablesHeading || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(variablesHeading, {
+    xPercent: 120,
+    opacity: 0,
+    ease: "none",
+    scrollTrigger: {
+      trigger: variablesHeading,
+      start: "top 90%",
+      end: "top 45%",
+      scrub: 1
+    }
+  });
+}
+
+function animateVariablesBodyOnScroll() {
+  const variablesTextElements = document.querySelectorAll(".section--variables p:not(.code), .section--variables ul");
+  const variablesCode = document.querySelector(".section--variables .code");
+  if ((!variablesTextElements.length && !variablesCode) || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  variablesTextElements.forEach((element) => {
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: element,
+        start: "top 90%",
+        end: "top 25%",
+        scrub: 1
+      }
+    })
+      .fromTo(element, { opacity: 0.25 }, { opacity: 1, ease: "none", duration: 0.25 })
+      .to(element, { opacity: 1, ease: "none", duration: 0.5 })
+      .to(element, { opacity: 0.25, ease: "none", duration: 0.25 });
+  });
+
+  if (variablesCode) {
+    gsap.fromTo(
+      variablesCode,
+      { opacity: 0.25 },
+      {
+        opacity: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: variablesCode,
+          start: "top 92%",
+          end: "top 65%",
+          scrub: 1
+        }
+      }
+    );
+  }
+}
+
 function setupRitualBlackMatter2Path() {
   const ritualBlackMatter2 = document.querySelector(".ritual-black-matter2");
   const sourcePath = document.querySelector("#ritual-black-matter-shape");
@@ -210,8 +272,8 @@ function animateRitualEyeTracking() {
     return;
   }
 
-  const maxX = 1.8;
-  const maxY = 1.2;
+  const maxX = 2.6;
+  const maxY = 1.8;
   let ritualIsActive = false;
 
   gsap.set(ritualPupil, {
@@ -227,6 +289,11 @@ function animateRitualEyeTracking() {
   const xTo = gsap.quickTo(ritualPupil, "x", { duration: 0.2, ease: "power3.out" });
   const yTo = gsap.quickTo(ritualPupil, "y", { duration: 0.2, ease: "power3.out" });
 
+  const resetPupilImmediate = () => {
+    gsap.killTweensOf(ritualPupil);
+    gsap.set(ritualPupil, { x: 0, y: 0 });
+  };
+
   window.addEventListener("pointermove", (event) => {
     if (!ritualIsActive) {
       return;
@@ -239,16 +306,15 @@ function animateRitualEyeTracking() {
     const normalizedX = (event.clientX - centerX) / (rect.width / 2);
     const normalizedY = (event.clientY - centerY) / (rect.height / 2);
 
-    const targetX = gsap.utils.clamp(-maxX, maxX, normalizedX * maxX);
-    const targetY = gsap.utils.clamp(-maxY, maxY, normalizedY * maxY);
+    const targetX = gsap.utils.clamp(-maxX, maxX, normalizedX * maxX * 1.1);
+    const targetY = gsap.utils.clamp(-maxY, maxY, normalizedY * maxY * 1.1);
 
     xTo(targetX);
     yTo(targetY);
   });
 
   window.addEventListener("pointerleave", () => {
-    xTo(0);
-    yTo(0);
+    resetPupilImmediate();
   });
 
   ritualButton.addEventListener("click", () => {
@@ -263,8 +329,7 @@ function animateRitualEyeTracking() {
     });
 
     if (!ritualIsActive) {
-      xTo(0);
-      yTo(0);
+      resetPupilImmediate();
     }
   });
 }
@@ -273,6 +338,8 @@ animateHeroFlames();
 animateEventsHeadingOnScroll();
 animateHeroText();
 animateEventsBodyOnScroll();
+animateVariablesHeadingOnScroll();
+animateVariablesBodyOnScroll();
 setupRitualBlackMatter2Path();
 animateRitualBlackMatter();
 animateRitualBlackMatterFlames();
