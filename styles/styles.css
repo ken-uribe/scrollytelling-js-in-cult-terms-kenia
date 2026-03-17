@@ -145,6 +145,54 @@ li {
     display: block;
 }
 
+.hero-svg--drift {
+    z-index: 0;
+    opacity: 0.45;
+    animation: hero-svg-horizontal-drift 5.6s ease-in-out infinite alternate;
+}
+
+.hero-svg path {
+    transform-box: fill-box;
+    transform-origin: center bottom;
+    animation-name: hero-flame-flicker;
+    animation-duration: var(--flame-duration, 3.2s);
+    animation-delay: var(--flame-delay, 0s);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    will-change: transform;
+}
+
+@keyframes hero-svg-horizontal-drift {
+    0% {
+        left: 48%;
+    }
+    100% {
+        left: 52%;
+    }
+}
+
+@keyframes hero-flame-flicker {
+    0% {
+        transform: translateY(0) scaleX(1) scaleY(1);
+    }
+    25% {
+        transform: translateY(calc(var(--flame-rise, 10px) * -0.55))
+                   scaleX(calc(1 + (var(--flame-spread, 0.01) * 1.35)))
+                   scaleY(calc(1 - (var(--flame-squeeze, 0.02) * 1.2)));
+    }
+    50% {
+        transform: translateY(calc(var(--flame-rise, 10px) * -1))
+                   scaleX(calc(1 - var(--flame-spread, 0.01)))
+                   scaleY(calc(1 + var(--flame-lift, 0.03)));
+    }
+    100% {
+        transform: translateY(calc(var(--flame-rise, 10px) * -0.4))
+                   scaleX(calc(1 + (var(--flame-spread, 0.01) * 1.25)))
+                   scaleY(calc(1 - (var(--flame-squeeze, 0.02) * 1.1)));
+    }
+}
+
 /* Content Container */
 .hero-content {
     position: relative;
