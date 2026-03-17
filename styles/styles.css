@@ -397,20 +397,32 @@ li {
 
 .variables-icon--faith {
   background-image: var(--icon-faith);
-  left: 78%;
-  top: 52%;
+  left: 19%;
+  top: 32%;
 }
 
 .variables-icon--gold {
   background-image: var(--icon-gold);
-  left: 36%;
-  top: 78%;
+  left: 31%;
+  top: 74%;
 }
 
 .variables-icon--hunger {
   background-image: var(--icon-hunger);
-  left: 26%;
-  top: 24%;
+  left: 50%;
+  top: 14%;
+}
+
+.variables-icon--health {
+  background-image: var(--icon-health);
+  left: 69%;
+  top: 74%;
+}
+
+.variables-icon--church {
+  background-image: var(--icon-church);
+  left: 81%;
+  top: 32%;
 }
 
 .faith-meter {

@@ -121,6 +121,8 @@
 --icon-faith: url("../assets/icons/faith-icon.svg");
 --icon-gold: url("../assets/icons/gold-icon.svg");
 --icon-hunger: url("../assets/icons/hunger-icon.svg");
+--icon-health: url("../assets/icons/health-icon.svg");
+--icon-church: url("../assets/icons/church-icon.svg");
 }
 
 [data-theme="dark"] {
