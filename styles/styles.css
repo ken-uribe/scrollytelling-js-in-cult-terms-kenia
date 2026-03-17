@@ -326,8 +326,8 @@ li {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 88%;
-  height: 88%;
+  width: 96%;
+  height: 96%;
   transform: translate(-50%, -50%);
   object-fit: contain;
   z-index: 2;

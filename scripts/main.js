@@ -203,26 +203,31 @@ function animateRitualBlackMatterImage() {
 
 function animateRitualEyeTracking() {
   const ritualEye = document.querySelector(".ritual-eye-animation");
+  const ritualPupil = document.querySelector(".ritual-eye-pupil");
   const ritualStack = document.querySelector(".ritual-stack");
-  if (!ritualEye || !ritualStack || typeof gsap === "undefined") {
+  const ritualButton = document.querySelector(".ritual-button");
+  if (!ritualEye || !ritualPupil || !ritualStack || !ritualButton || typeof gsap === "undefined") {
     return;
   }
 
-  const maxX = 18;
-  const maxY = 12;
+  const maxX = 1.8;
+  const maxY = 1.2;
+  let ritualIsActive = false;
 
-  gsap.set(ritualEye, {
-    xPercent: -57,
-    yPercent: -56,
+  gsap.set(ritualPupil, {
     x: 0,
     y: 0,
     transformOrigin: "50% 50%"
   });
 
-  const xTo = gsap.quickTo(ritualEye, "x", { duration: 0.18, ease: "power3.out" });
-  const yTo = gsap.quickTo(ritualEye, "y", { duration: 0.18, ease: "power3.out" });
+  const xTo = gsap.quickTo(ritualPupil, "x", { duration: 0.2, ease: "power3.out" });
+  const yTo = gsap.quickTo(ritualPupil, "y", { duration: 0.2, ease: "power3.out" });
 
   window.addEventListener("pointermove", (event) => {
+    if (!ritualIsActive) {
+      return;
+    }
+
     const rect = ritualStack.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -235,6 +240,22 @@ function animateRitualEyeTracking() {
 
     xTo(targetX);
     yTo(targetY);
+  });
+
+  window.addEventListener("pointerleave", () => {
+    xTo(0);
+    yTo(0);
+  });
+
+  ritualButton.addEventListener("click", () => {
+    ritualIsActive = !ritualIsActive;
+    ritualButton.textContent = ritualIsActive ? "End Ritual" : "Begin ritual";
+    ritualButton.setAttribute("aria-pressed", ritualIsActive ? "true" : "false");
+
+    if (!ritualIsActive) {
+      xTo(0);
+      yTo(0);
+    }
   });
 }
 
