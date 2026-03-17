@@ -162,7 +162,6 @@ function animateVariablesBodyOnScroll() {
 }
 
 function animateConditionalsTextOnScroll() {
-  const conditionalsSection = document.querySelector(".section--conditionals");
   const conditionalsStack = document.querySelector(".section--conditionals .conditionals-stack");
   const conditionalText = document.querySelectorAll(".section--conditionals .section__content h2, .section--conditionals .section__content ul, .section--conditionals .section__content p");
   const faithMeter = document.querySelector(".section--conditionals .faith-meter");
@@ -173,17 +172,7 @@ function animateConditionalsTextOnScroll() {
   }
 
   gsap.registerPlugin(ScrollTrigger);
-  const pinDistance = 180;
-
-  if (conditionalsSection && conditionalsStack) {
-    ScrollTrigger.create({
-      trigger: conditionalsSection,
-      start: "top top",
-      end: `+=${pinDistance}%`,
-      pin: conditionalsStack,
-      pinSpacing: true
-    });
-  }
+  const pinDistance = 220;
 
   conditionalText.forEach((element) => {
     gsap.timeline({
@@ -230,7 +219,9 @@ function animateConditionalsTextOnScroll() {
         trigger: ".section--conditionals",
         start: "top top",
         end: `+=${pinDistance}%`,
-        scrub: 1.2
+        scrub: 1.2,
+        pin: conditionalsStack || ".section--conditionals",
+        pinSpacing: true
       }
     });
 
@@ -261,6 +252,36 @@ function animateConditionalsTextOnScroll() {
           scale: 4,
           ease: "none",
           duration: 0.2
+        },
+        0.8
+      );
+
+      conditionalsProgressTl.to(
+        rebellionSvg,
+        {
+          keyframes: [
+            { x: -16, y: 10, rotation: -2.8 },
+            { x: 18, y: -12, rotation: 3.1 },
+            { x: -20, y: 12, rotation: -3.4 },
+            { x: 22, y: -14, rotation: 3.6 },
+            { x: -24, y: 12, rotation: -3.8 },
+            { x: 26, y: -13, rotation: 4 },
+            { x: -18, y: 9, rotation: -2.6 },
+            { x: 0, y: 0, rotation: 0 }
+          ],
+          ease: "none",
+          duration: 0.22
+        },
+        0.8
+      );
+
+      conditionalsProgressTl.to(
+        rebellionSvg,
+        {
+          scale: 12,
+          autoAlpha: 0,
+          ease: "none",
+          duration: 0.22
         },
         0.8
       );

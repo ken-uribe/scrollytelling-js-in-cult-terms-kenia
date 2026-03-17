@@ -456,6 +456,8 @@ li {
 }
 
 .rebellion-svg {
+  position: relative;
+  top: -120px;
   display: block;
   width: min(220px, 45vw);
   height: auto;
