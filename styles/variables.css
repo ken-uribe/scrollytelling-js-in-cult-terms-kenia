@@ -119,6 +119,7 @@
 --icon-faith: url("../assets/icons/faith-icon.svg");
 --icon-gold: url("../assets/icons/gold-icon.svg");
 --icon-hunger: url("../assets/icons/hunger-icn.svg");
+}
 
 [data-theme="dark"] {
 
@@ -127,7 +128,5 @@
 
 --color-text-primary: var(--neutral-0);
 --color-text-secondary: var(--neutral-200);
-
-}
 
 }
