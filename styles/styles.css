@@ -297,13 +297,29 @@ li {
   transform: translateX(-50%);
 }
 
-#ritual-black-matter {
+#ritual-black-matter,
+.ritual-black-matter2 {
   display: block;
   width: 100%;
   height: auto;
-  filter:
-    drop-shadow(0 0 25px var(--overlay-ink-70))
-    drop-shadow(0 0 10px var(--overlay-ink-60));
+}
+
+#ritual-black-matter {
+  position: relative;
+  z-index: 1;
+}
+
+.ritual-black-matter2 {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  fill: var(--red-500);
+  pointer-events: none;
+}
+
+.ritual-black-matter2 path {
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 .ritual-ring-art {

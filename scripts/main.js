@@ -99,8 +99,24 @@ function animateEventsBodyOnScroll() {
   }
 }
 
+function setupRitualBlackMatter2Path() {
+  const ritualBlackMatter2 = document.querySelector(".ritual-black-matter2");
+  const sourcePath = document.querySelector("#ritual-black-matter-shape");
+  if (!ritualBlackMatter2 || !sourcePath || ritualBlackMatter2.querySelector("path")) {
+    return;
+  }
+
+  const clonedPath = sourcePath.cloneNode(true);
+  clonedPath.removeAttribute("id");
+  clonedPath.classList.add("ritual-black-matter2__path");
+
+  ritualBlackMatter2.innerHTML = "";
+  ritualBlackMatter2.appendChild(clonedPath);
+}
+
 function animateRitualBlackMatter() {
   const ritualBlackMatter = document.querySelector("#ritual-black-matter");
+  const ritualBlackMatter2 = document.querySelector(".ritual-black-matter2");
   if (!ritualBlackMatter || typeof gsap === "undefined") {
     return;
   }
@@ -109,9 +125,63 @@ function animateRitualBlackMatter() {
     rotation: 90,
     scale: 0.82,
     transformOrigin: "50% 50%",
-    duration: 4.2,
-    ease: "power1.inOut",
+    duration: 6.4,
+    ease: "sine.inOut",
     yoyo: true,
+    repeat: -1
+  });
+
+  if (ritualBlackMatter2) {
+    gsap.set(ritualBlackMatter2, { scaleX: -1, transformOrigin: "50% 50%" });
+    gsap.to(ritualBlackMatter2, {
+      rotation: -90,
+      scaleX: -0.82,
+      scaleY: 0.82,
+      transformOrigin: "50% 50%",
+      duration: 6.4,
+      ease: "sine.inOut",
+      yoyo: true,
+      repeat: -1
+    });
+  }
+}
+
+function animateRitualBlackMatter2Flames() {
+  const ritualBlackMatter2Path = document.querySelector(".ritual-black-matter2__path");
+  if (!ritualBlackMatter2Path || typeof gsap === "undefined") {
+    return;
+  }
+
+  gsap.to(ritualBlackMatter2Path, {
+    keyframes: [
+      { x: 4, y: -6, rotation: 1.6, scaleX: 1.014, scaleY: 0.988 },
+      { x: -3, y: 5, rotation: -1.1, scaleX: 0.992, scaleY: 1.012 },
+      { x: 5, y: -8, rotation: 2, scaleX: 1.016, scaleY: 0.986 },
+      { x: 0, y: 0, rotation: 0, scaleX: 1, scaleY: 1 }
+    ],
+    transformOrigin: "50% 50%",
+    duration: 2.6,
+    ease: "sine.inOut",
+    repeat: -1
+  });
+}
+
+function animateRitualBlackMatterFlames() {
+  const ritualBlackMatterPath = document.querySelector("#ritual-black-matter-shape");
+  if (!ritualBlackMatterPath || typeof gsap === "undefined") {
+    return;
+  }
+
+  gsap.to(ritualBlackMatterPath, {
+    keyframes: [
+      { x: 4, y: -6, rotation: 1.6, scaleX: 1.014, scaleY: 0.988 },
+      { x: -3, y: 5, rotation: -1.1, scaleX: 0.992, scaleY: 1.012 },
+      { x: 5, y: -8, rotation: 2, scaleX: 1.016, scaleY: 0.986 },
+      { x: 0, y: 0, rotation: 0, scaleX: 1, scaleY: 1 }
+    ],
+    transformOrigin: "50% 50%",
+    duration: 2.6,
+    ease: "sine.inOut",
     repeat: -1
   });
 }
@@ -120,4 +190,7 @@ animateHeroFlames();
 animateEventsHeadingOnScroll();
 animateHeroText();
 animateEventsBodyOnScroll();
+setupRitualBlackMatter2Path();
 animateRitualBlackMatter();
+animateRitualBlackMatterFlames();
+animateRitualBlackMatter2Flames();
