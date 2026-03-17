@@ -133,10 +133,12 @@ li {
 /* Inline SVG Background */
 .hero-svg {
     position: absolute;
-    top: -4%;
-    left: -4%;
-    width: 108%;
-    height: 120%;
+    top: -10%;
+    left: 50%;
+    width: calc(100% + 24vw);
+    max-width: none;
+    height: 130%;
+    transform: translateX(-50%);
     z-index: 1;
     fill: var(--neutral-600);
     pointer-events: none;
