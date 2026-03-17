@@ -131,7 +131,8 @@ li {
 }
 
 /* Inline SVG Background */
-.hero-svg {
+.hero-svg,
+.hero2-svg {
     position: absolute;
     top: -10%;
     left: 50%;
@@ -145,13 +146,16 @@ li {
     display: block;
 }
 
-.hero-svg--drift {
+.hero2-svg {
     z-index: 0;
-    opacity: 0.45;
-    animation: hero-svg-horizontal-drift 5.6s ease-in-out infinite alternate;
+    opacity: 0;
+    transform: translateX(calc(-50% + var(--drift-x, 0vw)));
+    animation: hero-svg-horizontal-drift 7.6s linear infinite;
+    will-change: transform, opacity;
 }
 
-.hero-svg path {
+.hero-svg path,
+.hero2-svg path {
     transform-box: fill-box;
     transform-origin: center bottom;
     animation-name: hero-flame-flicker;
@@ -165,10 +169,18 @@ li {
 
 @keyframes hero-svg-horizontal-drift {
     0% {
-        left: 48%;
+        --drift-x: -10vw;
+        opacity: 0;
+    }
+    12% {
+        opacity: 0.45;
+    }
+    88% {
+        opacity: 0.45;
     }
     100% {
-        left: 52%;
+        --drift-x: 10vw;
+        opacity: 0;
     }
 }
 

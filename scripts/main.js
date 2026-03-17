@@ -1,26 +1,7 @@
 console.log("Scrollytelling site loaded");
 
-function setupHeroSvgDuplicate() {
-  const heroSection = document.querySelector(".section--hero.hero");
-  const primaryHeroSvg = heroSection?.querySelector(".hero-svg");
-  if (!heroSection || !primaryHeroSvg) {
-    return;
-  }
-
-  if (heroSection.querySelector(".hero-svg--drift")) {
-    return;
-  }
-
-  const duplicateHeroSvg = primaryHeroSvg.cloneNode(true);
-  duplicateHeroSvg.classList.add("hero-svg--drift");
-  duplicateHeroSvg.setAttribute("aria-hidden", "true");
-  duplicateHeroSvg.setAttribute("focusable", "false");
-
-  heroSection.insertBefore(duplicateHeroSvg, primaryHeroSvg.nextSibling);
-}
-
 function animateHeroFlames() {
-  const heroPaths = document.querySelectorAll(".hero-svg path");
+  const heroPaths = document.querySelectorAll(".hero-svg path, .hero2-svg path");
   if (!heroPaths.length) {
     return;
   }
@@ -43,5 +24,4 @@ function animateHeroFlames() {
   });
 }
 
-setupHeroSvgDuplicate();
 animateHeroFlames();
