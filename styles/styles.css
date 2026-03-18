@@ -926,7 +926,7 @@ li {
 .section--storage,
 .section--toggle {
   background: var(--color-danger);
-  color: var(--neutral-100);
+  color: var(--neutral-0);
 }
 
 /* Code blocks */
@@ -966,10 +966,23 @@ li {
       min-height: 100vh;
       height: 100vh;
     }
+
+    .parallax-layer {
+      width: max(205vw, 110rem);
+      min-width: 110rem;
+    }
 }
 
 /* Mobile devices */
 @media (max-width: 768px) {
+    .section {
+        padding: var(--space-xl) var(--space-md);
+    }
+
+    .section__content {
+        width: min(100%, 38rem);
+    }
+
     .hero {
         min-height: 100vh;
     }
@@ -985,10 +998,55 @@ li {
     .hero-title--secondary {
         font-size: 28px;
     }
+
+    .section h2 {
+        font-size: clamp(2rem, 11vw, 2.9rem);
+        line-height: 0.96;
+        text-wrap: balance;
+    }
+
+    .section p,
+    .section li {
+        font-size: clamp(1rem, 2.7vw, 1.125rem);
+    }
+
+    .chapter-highlight {
+        font-size: clamp(1rem, 5vw, 1.25rem);
+    }
+
+    .code {
+        padding: var(--space-sm);
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .ritual-stack {
+        width: min(82vw, 28rem);
+        margin: var(--space-lg) 0;
+    }
+
+    .ritual-eye-animation {
+        width: min(34vw, 150px);
+    }
+
+    .ritual-button {
+        min-height: 84px;
+        padding: 16px 28px;
+        font-size: clamp(1.6rem, 6vw, 2rem);
+    }
+
+    .parallax-layer {
+        width: max(245vw, 98rem);
+        min-width: 98rem;
+    }
 }
 
 /* Small mobile devices */
 @media (max-width: 480px) {
+    .section {
+        padding: var(--space-xl) 14px;
+    }
+
     .hero-title--primary {
         font-size: 36px;
     }
@@ -999,6 +1057,67 @@ li {
 
     .hero-content {
         padding: var(--space-sm);
+    }
+
+    .section h2 {
+        font-size: clamp(1.85rem, 15vw, 2.55rem);
+    }
+
+    .section ul {
+        padding-left: 0;
+    }
+
+    .conditionals-stack {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-xl);
+        width: min(100%, 24rem);
+    }
+
+    .section--conditionals {
+        justify-content: flex-start;
+        padding-top: calc(var(--space-xl) * 1.3);
+    }
+
+    .section--conditionals .section__content {
+        width: 100%;
+        text-align: left;
+    }
+
+    .section--conditionals .section__content h2 {
+        max-width: 8ch;
+    }
+
+    .faith-meter {
+        width: min(8.75rem, 38vw);
+        margin: 0 auto;
+    }
+
+    .faith-meter-svg {
+        height: clamp(26rem, 72vh, 36rem);
+        max-width: 100%;
+    }
+
+    .rebellion-svg {
+        top: -112px;
+        width: min(9rem, 36vw);
+    }
+
+    .ritual-stack {
+        width: min(88vw, 22rem);
+    }
+
+    .ritual-button {
+        width: 100%;
+        min-height: 76px;
+        padding: 14px 20px;
+        font-size: clamp(1.45rem, 8vw, 1.8rem);
+        white-space: normal;
+    }
+
+    .parallax-layer {
+        width: max(285vw, 88rem);
+        min-width: 88rem;
     }
 }
 

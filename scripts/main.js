@@ -248,40 +248,49 @@ function animateConditionalsTextOnScroll() {
   }
 
   gsap.registerPlugin(ScrollTrigger);
-  const pinDistance = 220;
+  const mm = gsap.matchMedia();
 
-  conditionalText.forEach((element) => {
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: element,
-        start: "top 92%",
-        end: "top 40%",
-        scrub: 1.4
-      }
-    })
-      .fromTo(element, { opacity: 0.2, y: 40 }, { opacity: 1, y: 0, ease: "none", duration: 0.4 })
-      .to(element, { opacity: 1, y: 0, ease: "none", duration: 0.6 });
-  });
+  function buildConditionalsTimeline(isSmallScreen) {
+    const pinDistance = isSmallScreen ? 165 : 220;
+    const pinTarget = isSmallScreen ? faithMeter : (conditionalsStack || ".section--conditionals");
 
-  if (faithMeter) {
-    gsap.fromTo(
-      faithMeter,
-      { xPercent: 40, opacity: 0 },
-      {
-        xPercent: 0,
-        opacity: 1,
-        ease: "none",
+    conditionalText.forEach((element) => {
+      gsap.timeline({
         scrollTrigger: {
-          trigger: ".section--conditionals .section__content",
-          start: "top 62%",
-          end: "top 42%",
-          scrub: 1.2
+          trigger: element,
+          start: "top 92%",
+          end: "top 40%",
+          scrub: 1.4,
+          invalidateOnRefresh: true
         }
-      }
-    );
-  }
+      })
+        .fromTo(element, { opacity: 0.2, y: 40 }, { opacity: 1, y: 0, ease: "none", duration: 0.4 })
+        .to(element, { opacity: 1, y: 0, ease: "none", duration: 0.6 });
+    });
 
-  if (faithMeterFill) {
+    if (faithMeter) {
+      gsap.fromTo(
+        faithMeter,
+        { xPercent: isSmallScreen ? 0 : 40, opacity: 0 },
+        {
+          xPercent: 0,
+          opacity: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".section--conditionals .section__content",
+            start: isSmallScreen ? "bottom 82%" : "top 62%",
+            end: isSmallScreen ? "bottom 58%" : "top 42%",
+            scrub: 1.2,
+            invalidateOnRefresh: true
+          }
+        }
+      );
+    }
+
+    if (!faithMeterFill) {
+      return;
+    }
+
     if (rebellionSvg) {
       gsap.set(rebellionSvg, {
         autoAlpha: 0,
@@ -293,11 +302,12 @@ function animateConditionalsTextOnScroll() {
     const conditionalsProgressTl = gsap.timeline({
       scrollTrigger: {
         trigger: ".section--conditionals",
-        start: "top top",
+        start: isSmallScreen ? "top 8%" : "top top",
         end: `+=${pinDistance}%`,
         scrub: 1.2,
-        pin: conditionalsStack || ".section--conditionals",
-        pinSpacing: true
+        pin: pinTarget,
+        pinSpacing: true,
+        invalidateOnRefresh: true
       }
     });
 
@@ -311,58 +321,68 @@ function animateConditionalsTextOnScroll() {
       0
     );
 
-    if (rebellionSvg) {
-      conditionalsProgressTl.to(
-        rebellionSvg,
-        {
-          autoAlpha: 1,
-          ease: "none",
-          duration: 0.001
-        },
-        0.5
-      );
-
-      conditionalsProgressTl.to(
-        rebellionSvg,
-        {
-          scale: 4,
-          ease: "none",
-          duration: 0.001
-        },
-        1
-      );
-
-      conditionalsProgressTl.to(
-        rebellionSvg,
-        {
-          keyframes: [
-            { x: -16, y: 10, rotation: -2.8 },
-            { x: 18, y: -12, rotation: 3.1 },
-            { x: -20, y: 12, rotation: -3.4 },
-            { x: 22, y: -14, rotation: 3.6 },
-            { x: -24, y: 12, rotation: -3.8 },
-            { x: 26, y: -13, rotation: 4 },
-            { x: -18, y: 9, rotation: -2.6 },
-            { x: 0, y: 0, rotation: 0 }
-          ],
-          ease: "none",
-          duration: 0.22
-        },
-        1
-      );
-
-      conditionalsProgressTl.to(
-        rebellionSvg,
-        {
-          scale: 12,
-          autoAlpha: 0,
-          ease: "none",
-          duration: 0.22
-        },
-        1
-      );
+    if (!rebellionSvg) {
+      return;
     }
+
+    conditionalsProgressTl.to(
+      rebellionSvg,
+      {
+        autoAlpha: 1,
+        ease: "none",
+        duration: 0.001
+      },
+      0.5
+    );
+
+    conditionalsProgressTl.to(
+      rebellionSvg,
+      {
+        scale: 4,
+        ease: "none",
+        duration: 0.001
+      },
+      1
+    );
+
+    conditionalsProgressTl.to(
+      rebellionSvg,
+      {
+        keyframes: [
+          { x: -16, y: 10, rotation: -2.8 },
+          { x: 18, y: -12, rotation: 3.1 },
+          { x: -20, y: 12, rotation: -3.4 },
+          { x: 22, y: -14, rotation: 3.6 },
+          { x: -24, y: 12, rotation: -3.8 },
+          { x: 26, y: -13, rotation: 4 },
+          { x: -18, y: 9, rotation: -2.6 },
+          { x: 0, y: 0, rotation: 0 }
+        ],
+        ease: "none",
+        duration: 0.22
+      },
+      1
+    );
+
+    conditionalsProgressTl.to(
+      rebellionSvg,
+      {
+        scale: 12,
+        autoAlpha: 0,
+        ease: "none",
+        duration: 0.22
+      },
+      1
+    );
   }
+
+  mm.add("(max-width: 480px)", () => {
+    buildConditionalsTimeline(true);
+  });
+
+  mm.add("(min-width: 481px)", () => {
+    buildConditionalsTimeline(false);
+  });
 }
 
 function animateVariablesIconsOrbit() {
