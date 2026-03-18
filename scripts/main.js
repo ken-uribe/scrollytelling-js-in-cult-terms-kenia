@@ -795,6 +795,113 @@ function setupNightModeToggleButton() {
   }
 }
 
+function animateLambSectionOnScroll() {
+  const lambSection = document.querySelector(".lamb-appears");
+  const lamb = document.querySelector(".lamb-appears .lamb-outline-svg");
+  const lambHeading = document.querySelector(".lamb-appears h2");
+  const lambText = document.querySelectorAll(".lamb-appears p");
+
+  if (
+    !lambSection ||
+    !lamb ||
+    typeof gsap === "undefined" ||
+    typeof ScrollTrigger === "undefined"
+  ) {
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.set(lamb, {
+    autoAlpha: 1,
+    scale: 1,
+    x: 0,
+    y: 0,
+    rotation: 0,
+    transformOrigin: "50% 50%"
+  });
+
+  gsap.set(lambSection, {
+    backgroundColor: "var(--red-300)"
+  });
+
+  const lambTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: lambSection,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 1.2
+    }
+  });
+
+  lambTimeline.to(
+    lamb,
+    {
+      autoAlpha: 1,
+      ease: "none",
+      duration: 0.001
+    },
+    0.5
+  );
+
+  lambTimeline.to(
+    lamb,
+    {
+      scale: 4,
+      ease: "none",
+      duration: 0.001
+    },
+    1
+  );
+
+  lambTimeline.to(
+    lamb,
+    {
+      scale: 14,
+      autoAlpha: 0,
+      ease: "none",
+      duration: 0.28
+    },
+    1
+  );
+
+  lambTimeline.to(
+    lambSection,
+    {
+      backgroundColor: "var(--neutral-700)",
+      ease: "none",
+      duration: 0.28
+    },
+    1
+  );
+
+  if (lambHeading) {
+    lambTimeline.to(
+      lambHeading,
+      {
+        color: "var(--neutral-100)",
+        ease: "none",
+        duration: 0.18
+      },
+      1
+    );
+  }
+
+  if (lambText.length) {
+    lambTimeline.to(
+      lambText,
+      {
+        color: "var(--neutral-300)",
+        opacity: 0.45,
+        ease: "none",
+        stagger: 0.04,
+        duration: 0.18
+      },
+      1
+    );
+  }
+}
+
 animateHeroFlames();
 animateEventsHeadingOnScroll();
 animateHeroText();
@@ -814,3 +921,4 @@ animateDarkMatterParallax();
 animateStorageSectionOnScroll();
 animateToggleSectionOnScroll();
 setupNightModeToggleButton();
+animateLambSectionOnScroll();
