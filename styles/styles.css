@@ -501,7 +501,7 @@ li {
 /* Dark matter parallax transition */
 .section--dark-matter-parallax {
   position: relative;
-  min-height: 150vh;
+  min-height: 260vh;
   padding: 0;
   overflow: hidden;
   background:
@@ -526,19 +526,21 @@ li {
 
 .section--dark-matter-parallax::after {
   bottom: 0;
-  height: 28vh;
-  background: linear-gradient(180deg, transparent 0%, rgba(214, 0, 31, 0.88) 55%, var(--color-danger) 100%);
+  height: 40vh;
+  background: linear-gradient(180deg, transparent 0%, rgba(140, 0, 19, 0.28) 22%, rgba(180, 0, 25, 0.62) 58%, var(--color-danger) 100%);
 }
 
 .dark-matter-parallax {
   position: relative;
   width: 100%;
-  min-height: 150vh;
+  min-height: 260vh;
 }
 
 .dark-matter-parallax__scene {
-  position: relative;
-  min-height: 150vh;
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  height: 100vh;
   overflow: hidden;
   isolation: isolate;
 }
@@ -579,8 +581,9 @@ li {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 100vw;
+  width: 140vw;
   max-width: none;
+  min-width: 120rem;
   pointer-events: none;
   transform: translate(-50%, -50%);
   will-change: transform, opacity;
@@ -649,9 +652,13 @@ li {
     }
 
     .section--dark-matter-parallax,
-    .dark-matter-parallax,
+    .dark-matter-parallax {
+      min-height: 200vh;
+    }
+
     .dark-matter-parallax__scene {
-      min-height: 120vh;
+      min-height: 100vh;
+      height: 100vh;
     }
 }
 

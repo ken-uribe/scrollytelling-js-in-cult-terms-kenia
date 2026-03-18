@@ -542,11 +542,11 @@ function animateDarkMatterParallax() {
     return;
   }
 
-  // Each layer moves upward at a different rate so the page feels like a downward fall.
+  // Stretch the transition across a taller sticky section so the fall reads clearly.
   const layerSettings = [
-    { element: backLayer, startY: 10, endY: -18 },
-    { element: middleLayer, startY: 18, endY: -34 },
-    { element: frontLayer, startY: 28, endY: -54 }
+    { element: backLayer, startY: 18, endY: -34 },
+    { element: middleLayer, startY: 28, endY: -52 },
+    { element: frontLayer, startY: 40, endY: -78 }
   ];
 
   layerSettings.forEach(({ element, startY, endY }) => {
@@ -558,13 +558,86 @@ function animateDarkMatterParallax() {
         ease: "none",
         scrollTrigger: {
           trigger: parallaxSection,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.2
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 2.4
         }
       }
     );
   });
+}
+
+function animateStorageSectionOnScroll() {
+  const storageSection = document.querySelector(".section--storage");
+  const storageTextElements = document.querySelectorAll(".section--storage h2, .section--storage ul, .section--storage .code, .section--storage p:not(.code)");
+  const saveIcon = document.querySelector(".section--storage .save-icon");
+  const saveIconPath = document.querySelector(".section--storage .save-icon path");
+
+  if (
+    !storageSection ||
+    !storageTextElements.length ||
+    !saveIcon ||
+    !saveIconPath ||
+    typeof gsap === "undefined" ||
+    typeof ScrollTrigger === "undefined"
+  ) {
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.set(storageTextElements, {
+    autoAlpha: 0,
+    y: 44
+  });
+
+  gsap.to(storageTextElements, {
+    autoAlpha: 1,
+    y: 0,
+    duration: 0.9,
+    ease: "power2.out",
+    stagger: 0.12,
+    scrollTrigger: {
+      trigger: storageSection,
+      start: "top 62%",
+      toggleActions: "play none none reverse"
+    }
+  });
+
+  const saveIconLength = saveIconPath.getTotalLength();
+
+  gsap.set(saveIcon, {
+    autoAlpha: 0.2,
+    y: 36
+  });
+
+  gsap.set(saveIconPath, {
+    strokeDasharray: saveIconLength,
+    strokeDashoffset: saveIconLength
+  });
+
+  const saveIconTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: saveIcon,
+      start: "top 78%",
+      end: "top 48%",
+      scrub: 1,
+      toggleActions: "play none none reverse"
+    }
+  });
+
+  saveIconTimeline
+    .to(saveIcon, {
+      autoAlpha: 1,
+      y: 0,
+      ease: "none",
+      duration: 0.25
+    })
+    .to(saveIconPath, {
+      strokeDashoffset: 0,
+      ease: "none",
+      duration: 0.75
+    }, 0);
 }
 
 animateHeroFlames();
@@ -583,3 +656,4 @@ animateRitualBlackMatterImage();
 animateRitualEyeTracking();
 animateDarkMatterTurbulence();
 animateDarkMatterParallax();
+animateStorageSectionOnScroll();
