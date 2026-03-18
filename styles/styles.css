@@ -151,6 +151,7 @@ main {
   height: auto;
   margin: var(--space-2xl) auto calc(var(--space-3xl) * -0.5);
   color: var(--neutral-900);
+  fill: none;
   filter:
     drop-shadow(0 0 18px color-mix(in srgb, var(--red-200) 16%, transparent))
     drop-shadow(0 24px 48px color-mix(in srgb, var(--neutral-700) 52%, transparent));
