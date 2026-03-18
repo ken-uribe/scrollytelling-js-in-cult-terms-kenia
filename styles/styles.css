@@ -3,10 +3,27 @@ body {
     background-color: var(--color-background-primary);
     color: var(--color-text-primary);
     overflow-x: clip;
+    transition: background-color 900ms ease, color 900ms ease;
 }
 
 html {
     overflow-x: clip;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 4, 10, 0);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 900ms ease, background-color 900ms ease;
+    z-index: 999;
+}
+
+[data-theme="dark"] body::after {
+    background: rgba(8, 4, 10, 0.28);
+    opacity: 1;
 }
 
 /* ================================
@@ -84,6 +101,7 @@ main {
   min-height: 220vh;
   padding-block: 0;
   align-items: stretch;
+  transition: background 360ms ease;
 }
 
 .section--toggle .section__content {
@@ -547,8 +565,106 @@ li {
   display: block;
   width: min(var(--size-toggle), 55vw);
   height: auto;
+  overflow: visible;
+  --toggle-track-color: var(--neutral-700);
+  --toggle-knob-color: var(--neutral-700);
+  --toggle-glow-strong: color-mix(in srgb, var(--neutral-100) 38%, transparent);
+  --toggle-glow-soft: color-mix(in srgb, var(--neutral-200) 20%, transparent);
+}
+
+.night-mode-toggle-button {
+  position: relative;
+  display: block;
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
   margin: var(--space-md) auto 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
   color: var(--neutral-700);
+  border-radius: 999px;
+  user-select: none;
+  transition: transform 280ms ease;
+  isolation: isolate;
+}
+
+.night-mode-toggle-button:focus {
+  outline: none;
+}
+
+.night-mode-toggle-button:hover,
+.night-mode-toggle-button:focus-visible {
+  outline: none;
+  transform: scale(1.03);
+}
+
+.night-mode-toggle-button:active {
+  background: transparent;
+}
+
+.night-mode-toggle-button::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 175%;
+  height: 210%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--neutral-100) 46%, transparent) 0%,
+    color-mix(in srgb, var(--neutral-200) 22%, transparent) 34%,
+    color-mix(in srgb, var(--neutral-300) 10%, transparent) 52%,
+    transparent 78%
+  );
+  filter: blur(16px);
+  opacity: 0.82;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.night-mode-toggle__track,
+.night-mode-toggle__knob {
+  transition: stroke 280ms ease, fill 280ms ease, filter 280ms ease;
+  filter:
+    drop-shadow(0 0 4px var(--toggle-glow-strong))
+    drop-shadow(0 0 10px var(--toggle-glow-soft));
+}
+
+.night-mode-toggle__track {
+  stroke: var(--toggle-track-color);
+}
+
+.night-mode-toggle__knob {
+  fill: var(--toggle-knob-color);
+  stroke: var(--toggle-knob-color);
+}
+
+.section--toggle.is-lights-off {
+  background: linear-gradient(180deg, #5e0010 0%, #280006 56%, #170004 100%);
+}
+
+.section--toggle.is-lights-off .night-mode-toggle-button {
+}
+
+.section--toggle.is-lights-off .night-mode-toggle {
+  --toggle-track-color: var(--neutral-100);
+  --toggle-knob-color: var(--neutral-100);
+  --toggle-glow-strong: color-mix(in srgb, var(--neutral-100) 28%, transparent);
+  --toggle-glow-soft: color-mix(in srgb, var(--neutral-200) 14%, transparent);
+}
+
+.section--toggle.is-lights-off .night-mode-toggle-button::before {
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--neutral-100) 28%, transparent) 0%,
+    color-mix(in srgb, var(--neutral-200) 16%, transparent) 34%,
+    color-mix(in srgb, var(--neutral-300) 8%, transparent) 52%,
+    transparent 78%
+  );
 }
 
 /* Dark matter parallax transition */

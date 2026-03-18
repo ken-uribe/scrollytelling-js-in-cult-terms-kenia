@@ -722,6 +722,62 @@ function animateToggleSectionOnScroll() {
     }, 0.7);
 }
 
+function setupNightModeToggleButton() {
+  const toggleSection = document.querySelector(".section--toggle");
+  const toggleButton = document.querySelector(".night-mode-toggle-button");
+  const toggleKnob = document.querySelector(".night-mode-toggle__knob");
+  const toggleHighlightText = document.querySelector(".section--toggle .chapter-highlight");
+  const rootElement = document.documentElement;
+
+  if (
+    !toggleSection ||
+    !toggleButton ||
+    !toggleKnob ||
+    typeof gsap === "undefined"
+  ) {
+    return;
+  }
+
+  let lightsOff = rootElement.dataset.theme === "dark";
+
+  gsap.set(toggleKnob, {
+    transformOrigin: "50% 50%",
+    x: lightsOff ? 40 : 0
+  });
+
+  toggleSection.classList.toggle("is-lights-off", lightsOff);
+  toggleButton.setAttribute("aria-pressed", String(lightsOff));
+
+  toggleButton.addEventListener("click", () => {
+    lightsOff = !lightsOff;
+    toggleSection.classList.toggle("is-lights-off", lightsOff);
+    rootElement.dataset.theme = lightsOff ? "dark" : "light";
+    toggleButton.setAttribute("aria-pressed", String(lightsOff));
+
+    gsap.to(toggleKnob, {
+      x: lightsOff ? 40 : 0,
+      duration: 0.6,
+      ease: "power2.inOut"
+    });
+
+    gsap.to(toggleButton, {
+      scale: lightsOff ? 0.98 : 1,
+      duration: 0.32,
+      yoyo: true,
+      repeat: 1,
+      ease: "power1.inOut"
+    });
+
+    if (toggleHighlightText) {
+      gsap.to(toggleHighlightText, {
+        color: lightsOff ? "var(--neutral-0)" : "var(--neutral-100)",
+        duration: 0.75,
+        ease: "power1.out"
+      });
+    }
+  });
+}
+
 animateHeroFlames();
 animateEventsHeadingOnScroll();
 animateHeroText();
@@ -740,3 +796,4 @@ animateDarkMatterTurbulence();
 animateDarkMatterParallax();
 animateStorageSectionOnScroll();
 animateToggleSectionOnScroll();
+setupNightModeToggleButton();
