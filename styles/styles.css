@@ -117,21 +117,13 @@ main {
 .lamb-appears {
   position: relative;
   min-height: 165vh;
-  background:
-    radial-gradient(circle at 50% 28%, color-mix(in srgb, var(--neutral-100) 12%, transparent) 0%, transparent 34%),
-    linear-gradient(180deg, var(--red-500) 0%, var(--neutral-600) 60%, var(--neutral-700) 100%);
+  background: var(--red-500);
   color: var(--neutral-100);
   overflow: hidden;
 }
 
 .lamb-appears::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--red-300) 16%, transparent) 0%, transparent 38%),
-    linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--neutral-700) 28%, transparent) 100%);
-  pointer-events: none;
+  content: none;
 }
 
 .lamb-appears .section__content {
@@ -158,19 +150,14 @@ main {
   width: min(980px, 130vw);
   height: auto;
   margin: var(--space-2xl) auto calc(var(--space-3xl) * -0.5);
-  color: var(--neutral-100);
+  color: var(--neutral-900);
   filter:
     drop-shadow(0 0 18px color-mix(in srgb, var(--red-200) 16%, transparent))
     drop-shadow(0 24px 48px color-mix(in srgb, var(--neutral-700) 52%, transparent));
 }
 
-.lamb-outline-svg path,
-.lamb-outline-svg ellipse {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 16;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.lamb-outline-svg path {
+  fill: currentColor;
 }
 
 .conditionals-stack {
