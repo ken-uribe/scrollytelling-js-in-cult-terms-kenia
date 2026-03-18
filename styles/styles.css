@@ -2,6 +2,11 @@ body {
     font-family: var(--font-display);
     background-color: var(--color-background-primary);
     color: var(--color-text-primary);
+    overflow-x: clip;
+}
+
+html {
+    overflow-x: clip;
 }
 
 /* ================================
@@ -493,25 +498,115 @@ li {
   color: var(--neutral-700);
 }
 
+/* Dark matter parallax transition */
+.section--dark-matter-parallax {
+  position: relative;
+  min-height: 150vh;
+  padding: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 35%, var(--overlay-ink-20) 0%, transparent 48%),
+    linear-gradient(180deg, var(--color-danger) 0%, #8c0013 52%, var(--color-danger) 100%);
+}
+
+.section--dark-matter-parallax::before,
+.section--dark-matter-parallax::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  height: 18vh;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.section--dark-matter-parallax::before {
+  top: 0;
+  background: linear-gradient(180deg, var(--color-danger) 0%, transparent 100%);
+}
+
+.section--dark-matter-parallax::after {
+  bottom: 0;
+  height: 28vh;
+  background: linear-gradient(180deg, transparent 0%, rgba(214, 0, 31, 0.88) 55%, var(--color-danger) 100%);
+}
+
+.dark-matter-parallax {
+  position: relative;
+  width: 100%;
+  min-height: 150vh;
+}
+
+.dark-matter-parallax__scene {
+  position: relative;
+  min-height: 150vh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.dark-matter-parallax__glow {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 92, 92, 0.18) 0%, transparent 40%),
+    linear-gradient(180deg, transparent 0%, rgba(32, 0, 0, 0.18) 45%, rgba(214, 0, 31, 0.42) 100%);
+  mix-blend-mode: screen;
+}
+
 .dark-matter-2 {
   display: block;
   width: 100vw;
+  max-width: none;
   height: auto;
-  margin: var(--space-md) calc(50% - 50vw) 0;
   color: var(--neutral-700);
   fill: currentColor;
   filter: drop-shadow(0 8px 18px var(--overlay-ink-25));
-  overflow: visible;
+  overflow: hidden;
 }
 
 .dark-matter-2 .st0 {
   display: inline;
 }
 
-.dark-matter-2 #Horizontal_Black_matter {
+.dark-matter-2 #dark-matter-shape,
+.dark-matter-2 use {
   transform-box: fill-box;
   transform-origin: center;
-  transform: translateX(-1.2%) scaleX(1.14);
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  max-width: none;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+}
+
+.parallax-layer--back {
+  z-index: 1;
+  opacity: 0.3;
+  color: rgba(15, 0, 0, 0.96);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.parallax-2 {
+  z-index: 2;
+  opacity: 0.48;
+  color: rgba(8, 0, 0, 0.98);
+  mix-blend-mode: multiply;
+  transform: translate(-50%, -50%) scale(1.22);
+}
+
+.parallax-3 {
+  z-index: 3;
+  opacity: 0.72;
+  color: rgba(0, 0, 0, 1);
+  mix-blend-mode: multiply;
+  transform: translate(-50%, -50%) scale(1.34);
 }
 
 /* Cult red sections */
@@ -551,6 +646,12 @@ li {
 
     .hero-title--secondary {
         font-size: 36px;
+    }
+
+    .section--dark-matter-parallax,
+    .dark-matter-parallax,
+    .dark-matter-parallax__scene {
+      min-height: 120vh;
     }
 }
 

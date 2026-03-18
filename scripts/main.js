@@ -1,5 +1,9 @@
 console.log("Scrollytelling site loaded");
 
+if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 function animateHeroFlames() {
   const heroPaths = document.querySelectorAll(".hero-svg path, .hero2-svg path");
   if (!heroPaths.length) {
@@ -228,7 +232,7 @@ function animateConditionalsTextOnScroll() {
     conditionalsProgressTl.to(
       faithMeterFill,
       {
-        attr: { y: 2, height: 332 },
+        attr: { y: 334, height: 0 },
         ease: "none",
         duration: 1
       },
@@ -521,6 +525,48 @@ function animateDarkMatterTurbulence() {
   });
 }
 
+function animateDarkMatterParallax() {
+  const parallaxSection = document.querySelector(".section--dark-matter-parallax");
+  const backLayer = document.querySelector(".parallax-layer--back");
+  const middleLayer = document.querySelector(".parallax-2");
+  const frontLayer = document.querySelector(".parallax-3");
+
+  if (
+    !parallaxSection ||
+    !backLayer ||
+    !middleLayer ||
+    !frontLayer ||
+    typeof gsap === "undefined" ||
+    typeof ScrollTrigger === "undefined"
+  ) {
+    return;
+  }
+
+  // Each layer moves upward at a different rate so the page feels like a downward fall.
+  const layerSettings = [
+    { element: backLayer, startY: 10, endY: -18 },
+    { element: middleLayer, startY: 18, endY: -34 },
+    { element: frontLayer, startY: 28, endY: -54 }
+  ];
+
+  layerSettings.forEach(({ element, startY, endY }) => {
+    gsap.fromTo(
+      element,
+      { yPercent: startY },
+      {
+        yPercent: endY,
+        ease: "none",
+        scrollTrigger: {
+          trigger: parallaxSection,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.2
+        }
+      }
+    );
+  });
+}
+
 animateHeroFlames();
 animateEventsHeadingOnScroll();
 animateHeroText();
@@ -536,3 +582,4 @@ animateRitualBlackMatter2Flames();
 animateRitualBlackMatterImage();
 animateRitualEyeTracking();
 animateDarkMatterTurbulence();
+animateDarkMatterParallax();
