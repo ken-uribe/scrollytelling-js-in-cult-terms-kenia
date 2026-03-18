@@ -72,7 +72,7 @@ body.is-end-blackout main {
 .section--storage,
 .section--toggle {
   background: var(--color-danger);
-  color: var(--neutral-100);
+  color: var(--neutral-0);
 }
 
 .section--conditionals {
@@ -529,6 +529,26 @@ li {
     0 12px 24px var(--overlay-ink-25),
     0 24px 48px var(--overlay-ink-20),
     0 0 28px var(--overlay-ink-30);
+  transition: transform 180ms ease, box-shadow 180ms ease, outline-color 180ms ease;
+}
+
+.ritual-button:hover {
+  transform: translateY(-1px);
+}
+
+.ritual-button:focus {
+  outline: none;
+}
+
+.ritual-button:focus-visible {
+  outline: 3px solid var(--neutral-0);
+  outline-offset: 5px;
+  box-shadow:
+    0 0 0 6px color-mix(in srgb, var(--color-accent-primary) 38%, transparent),
+    0 8px 0 var(--overlay-ink-25),
+    0 12px 24px var(--overlay-ink-25),
+    0 24px 48px var(--overlay-ink-20),
+    0 0 28px var(--overlay-ink-30);
 }
 
 
@@ -708,8 +728,13 @@ li {
 
 .night-mode-toggle-button:hover,
 .night-mode-toggle-button:focus-visible {
-  outline: none;
   transform: scale(1.03);
+}
+
+.night-mode-toggle-button:focus-visible {
+  outline: 3px solid var(--neutral-0);
+  outline-offset: 6px;
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--color-accent-primary) 32%, transparent);
 }
 
 .night-mode-toggle-button:active {
@@ -995,6 +1020,66 @@ li {
     * {
         animation: none !important;
         transition: none !important;
+    }
+
+    html,
+    body,
+    #smooth-wrapper,
+    #smooth-content {
+        scroll-behavior: auto !important;
+    }
+
+    #smooth-wrapper,
+    #smooth-content,
+    main {
+        height: auto !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+        transform: none !important;
+    }
+
+    .section,
+    .section--storage,
+    .section--toggle,
+    .section--dark-matter-parallax,
+    .dark-matter-parallax,
+    .lamb-appears {
+        min-height: auto !important;
+    }
+
+    .section--storage,
+    .section--toggle,
+    .section--dark-matter-parallax {
+        padding-block: var(--space-3xl) !important;
+    }
+
+    .section--storage .section__content,
+    .section--toggle .section__content,
+    .dark-matter-parallax__scene,
+    .lamb-appears .section__content {
+        position: static !important;
+        top: auto !important;
+        height: auto !important;
+        min-height: auto !important;
+    }
+
+    .lamb-appears .section__content {
+        padding-bottom: var(--space-3xl) !important;
+    }
+
+    .conditionals-stack,
+    .section--conditionals .section__content {
+        width: min(720px, 90%) !important;
+    }
+
+    [data-speed],
+    [data-lag] {
+        transform: none !important;
+    }
+
+    .dark-matter-parallax__glow,
+    .cult-crown-wrap::after {
+        opacity: 1;
     }
 }
 

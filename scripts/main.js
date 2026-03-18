@@ -1,5 +1,3 @@
-console.log("Scrollytelling site loaded");
-
 const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 let scrollSmootherInstance = null;
 
