@@ -55,6 +55,7 @@
 --color-accent-primary: var(--teal-300);
 
 --color-danger: var(--red-300);
+--color-silhouette-primary: var(--neutral-700);
 --color-hero-secondary: var(--red-500);
 --color-eye-stroke: var(--red-400);
 --color-highlight: var(--purple-300);
@@ -132,5 +133,6 @@
 
 --color-text-primary: var(--neutral-0);
 --color-text-secondary: var(--neutral-200);
+--color-silhouette-primary: var(--neutral-700);
 
 }
