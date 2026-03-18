@@ -114,6 +114,65 @@ main {
   padding-block: var(--space-3xl);
 }
 
+.lamb-appears {
+  position: relative;
+  min-height: 165vh;
+  background:
+    radial-gradient(circle at 50% 28%, color-mix(in srgb, var(--neutral-100) 12%, transparent) 0%, transparent 34%),
+    linear-gradient(180deg, var(--red-500) 0%, var(--neutral-600) 60%, var(--neutral-700) 100%);
+  color: var(--neutral-100);
+  overflow: hidden;
+}
+
+.lamb-appears::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--red-300) 16%, transparent) 0%, transparent 38%),
+    linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--neutral-700) 28%, transparent) 100%);
+  pointer-events: none;
+}
+
+.lamb-appears .section__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 12vh;
+}
+
+.lamb-appears h2 {
+  color: var(--neutral-0);
+}
+
+.lamb-appears p {
+  color: var(--neutral-200);
+}
+
+.lamb-outline-svg {
+  display: block;
+  width: min(980px, 130vw);
+  height: auto;
+  margin: var(--space-2xl) auto calc(var(--space-3xl) * -0.5);
+  color: var(--neutral-100);
+  filter:
+    drop-shadow(0 0 18px color-mix(in srgb, var(--red-200) 16%, transparent))
+    drop-shadow(0 24px 48px color-mix(in srgb, var(--neutral-700) 52%, transparent));
+}
+
+.lamb-outline-svg path,
+.lamb-outline-svg ellipse {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 16;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .conditionals-stack {
   display: flex;
   align-items: center;
