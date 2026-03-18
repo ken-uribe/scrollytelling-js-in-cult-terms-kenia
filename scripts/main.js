@@ -591,24 +591,11 @@ function animateStorageSectionOnScroll() {
     y: 44
   });
 
-  gsap.to(storageTextElements, {
-    autoAlpha: 1,
-    y: 0,
-    duration: 0.9,
-    ease: "power2.out",
-    stagger: 0.12,
-    scrollTrigger: {
-      trigger: storageSection,
-      start: "top 62%",
-      toggleActions: "play none none reverse"
-    }
-  });
-
   const saveIconLength = saveIconPath.getTotalLength();
 
   gsap.set(saveIcon, {
-    autoAlpha: 0.2,
-    y: 36
+    autoAlpha: 0.18,
+    y: 40
   });
 
   gsap.set(saveIconPath, {
@@ -616,28 +603,123 @@ function animateStorageSectionOnScroll() {
     strokeDashoffset: saveIconLength
   });
 
-  const saveIconTimeline = gsap.timeline({
+  const storageTimeline = gsap.timeline({
     scrollTrigger: {
-      trigger: saveIcon,
-      start: "top 78%",
-      end: "top 48%",
-      scrub: 1,
-      toggleActions: "play none none reverse"
+      trigger: storageSection,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 1.4
     }
   });
 
-  saveIconTimeline
+  storageTimeline
+    .to(storageTextElements, {
+      autoAlpha: 1,
+      y: 0,
+      ease: "none",
+      stagger: 0.22,
+      duration: 0.9
+    })
     .to(saveIcon, {
       autoAlpha: 1,
       y: 0,
       ease: "none",
-      duration: 0.25
-    })
+      duration: 0.45
+    }, ">-0.15")
     .to(saveIconPath, {
       strokeDashoffset: 0,
       ease: "none",
-      duration: 0.75
-    }, 0);
+      duration: 1.2
+    }, "<")
+    .to({}, {
+      duration: 0.35
+    });
+}
+
+function animateToggleSectionOnScroll() {
+  const toggleSection = document.querySelector(".section--toggle");
+  const toggleTextElements = document.querySelectorAll(".section--toggle h2, .section--toggle ul, .section--toggle .chapter-highlight");
+  const toggleCode = document.querySelector(".section--toggle .code");
+  const crownWrap = document.querySelector(".section--toggle .cult-crown-wrap");
+  const crown = document.querySelector(".section--toggle .cult-crown");
+
+  if (
+    !toggleSection ||
+    !toggleTextElements.length ||
+    !crownWrap ||
+    !crown ||
+    typeof gsap === "undefined" ||
+    typeof ScrollTrigger === "undefined"
+  ) {
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const toggleTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: toggleSection,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 1.2,
+      onUpdate: (self) => {
+        if (self.progress > 0.62) {
+          crownFloatTween.play();
+        } else {
+          crownFloatTween.pause(0);
+          gsap.set(crown, { yPercent: 0 });
+        }
+      }
+    }
+  });
+
+  const textCuePoints = [0.04, 0.2, 0.76];
+
+  toggleTextElements.forEach((element, index) => {
+    const cuePoint = textCuePoints[index] ?? 0.2 + index * 0.18;
+    toggleTimeline
+      .fromTo(element, { opacity: 0.22 }, { opacity: 1, ease: "none", duration: 0.15 }, cuePoint)
+      .to(element, { opacity: 1, ease: "none", duration: 0.18 }, cuePoint + 0.15)
+      .to(element, { opacity: 0.32, ease: "none", duration: 0.14 }, cuePoint + 0.33);
+  });
+
+  if (toggleCode) {
+    toggleTimeline
+      .fromTo(toggleCode, { opacity: 0.22 }, { opacity: 1, ease: "none", duration: 0.18 }, 0.36)
+      .to(toggleCode, { opacity: 1, ease: "none", duration: 0.24 }, 0.54);
+  }
+
+  gsap.set(crownWrap, {
+    autoAlpha: 0,
+    yPercent: 8,
+    scale: 0.72,
+    transformOrigin: "50% 50%"
+  });
+
+  const crownFloatTween = gsap.to(crown, {
+    yPercent: -9,
+    duration: 2.45,
+    ease: "sine.inOut",
+    repeat: -1,
+    yoyo: true,
+    paused: true
+  });
+
+  toggleTimeline
+    .to(crownWrap, {
+      autoAlpha: 1,
+      yPercent: 0,
+      scale: 1,
+      ease: "none",
+      duration: 0.24
+    }, 0.46)
+    .to(crownWrap, {
+      autoAlpha: 1,
+      yPercent: 0,
+      scale: 1,
+      ease: "none",
+      duration: 0.24
+    }, 0.7);
 }
 
 animateHeroFlames();
@@ -657,3 +739,4 @@ animateRitualEyeTracking();
 animateDarkMatterTurbulence();
 animateDarkMatterParallax();
 animateStorageSectionOnScroll();
+animateToggleSectionOnScroll();
