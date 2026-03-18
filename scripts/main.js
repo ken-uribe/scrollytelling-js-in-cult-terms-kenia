@@ -797,12 +797,17 @@ function setupNightModeToggleButton() {
 
 function animateLambSectionOnScroll() {
   const lambSection = document.querySelector(".lamb-appears");
+  const lambContent = document.querySelector(".lamb-appears .section__content");
   const lamb = document.querySelector(".lamb-appears .lamb-outline-svg");
   const lambHeading = document.querySelector(".lamb-appears h2");
   const lambText = document.querySelectorAll(".lamb-appears p");
+  const memoryWord = document.querySelector(".lamb-appears .memory-word");
+  const rootElement = document.documentElement;
+  const bodyElement = document.body;
 
   if (
     !lambSection ||
+    !lambContent ||
     !lamb ||
     typeof gsap === "undefined" ||
     typeof ScrollTrigger === "undefined"
@@ -825,12 +830,45 @@ function animateLambSectionOnScroll() {
     backgroundColor: "var(--red-300)"
   });
 
+  gsap.set(lambContent, {
+    yPercent: 0
+  });
+
+  if (memoryWord) {
+    gsap.set(memoryWord, {
+      color: "inherit",
+      x: 0,
+      y: 0,
+      rotation: 0,
+      transformOrigin: "50% 50%"
+    });
+  }
+
   const lambTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: lambSection,
       start: "top top",
-      end: "bottom bottom",
-      scrub: 1.2
+      end: "+=132%",
+      scrub: 1.2,
+      pin: lambContent,
+      pinSpacing: false,
+      onUpdate: (self) => {
+        const shouldBlackout = self.progress >= 0.74;
+        rootElement.classList.toggle("is-end-blackout", shouldBlackout);
+        bodyElement.classList.toggle("is-end-blackout", shouldBlackout);
+      },
+      onLeave: () => {
+        rootElement.classList.add("is-end-blackout");
+        bodyElement.classList.add("is-end-blackout");
+      },
+      onEnterBack: () => {
+        rootElement.classList.remove("is-end-blackout");
+        bodyElement.classList.remove("is-end-blackout");
+      },
+      onLeaveBack: () => {
+        rootElement.classList.remove("is-end-blackout");
+        bodyElement.classList.remove("is-end-blackout");
+      }
     }
   });
 
@@ -841,28 +879,40 @@ function animateLambSectionOnScroll() {
       ease: "none",
       duration: 0.001
     },
-    0.5
+    0.18
   );
 
-  lambTimeline.to(
+  lambTimeline.fromTo(
     lamb,
     {
-      scale: 4,
-      ease: "none",
-      duration: 0.001
+      scale: 1,
     },
-    1
-  );
-
-  lambTimeline.to(
-    lamb,
     {
       scale: 14,
+      ease: "none",
+      duration: 0.52
+    },
+    0.18
+  );
+
+  lambTimeline.to(
+    lamb,
+    {
       autoAlpha: 0,
       ease: "none",
-      duration: 0.28
+      duration: 0.18
     },
-    1
+    0.8
+  );
+
+  lambTimeline.to(
+    lambContent,
+    {
+      yPercent: 26,
+      ease: "none",
+      duration: 0.26
+    },
+    0.72
   );
 
   lambTimeline.to(
@@ -870,9 +920,9 @@ function animateLambSectionOnScroll() {
     {
       backgroundColor: "var(--neutral-700)",
       ease: "none",
-      duration: 0.28
+      duration: 0.26
     },
-    1
+    0.72
   );
 
   if (lambHeading) {
@@ -883,7 +933,36 @@ function animateLambSectionOnScroll() {
         ease: "none",
         duration: 0.18
       },
-      1
+      0.72
+    );
+  }
+
+  if (memoryWord) {
+    lambTimeline.to(
+      memoryWord,
+      {
+        color: "var(--color-accent-primary)",
+        ease: "none",
+        duration: 0.08
+      },
+      0.84
+    );
+
+    lambTimeline.to(
+      memoryWord,
+      {
+        keyframes: [
+          { x: -2, y: 1, rotation: -1.2 },
+          { x: 2, y: -1, rotation: 1.1 },
+          { x: -2.5, y: 1.4, rotation: -1.5 },
+          { x: 2.5, y: -1.4, rotation: 1.5 },
+          { x: -1.8, y: 1, rotation: -0.9 },
+          { x: 0, y: 0, rotation: 0 }
+        ],
+        ease: "none",
+        duration: 0.12
+      },
+      0.88
     );
   }
 
@@ -891,13 +970,12 @@ function animateLambSectionOnScroll() {
     lambTimeline.to(
       lambText,
       {
-        color: "var(--neutral-300)",
-        opacity: 0.45,
+        color: "var(--neutral-200)",
+        opacity: 1,
         ease: "none",
-        stagger: 0.04,
         duration: 0.18
       },
-      1
+      0.72
     );
   }
 }

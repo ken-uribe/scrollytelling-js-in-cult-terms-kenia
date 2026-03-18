@@ -8,6 +8,8 @@ body {
 
 html {
     overflow-x: clip;
+    background-color: var(--color-background-primary);
+    transition: background-color 900ms ease;
 }
 
 body::after {
@@ -34,6 +36,13 @@ main {
   width: 100%;
   display: flex;
   flex-direction: column;
+  transition: background-color 900ms ease;
+}
+
+html.is-end-blackout,
+body.is-end-blackout,
+body.is-end-blackout main {
+  background-color: var(--neutral-700);
 }
 
 /* Every story section */
@@ -116,7 +125,7 @@ main {
 
 .lamb-appears {
   position: relative;
-  min-height: 200vh;
+  min-height: 136vh;
   background: var(--red-300);
   color: var(--neutral-100);
   overflow: hidden;
@@ -127,8 +136,7 @@ main {
 }
 
 .lamb-appears .section__content {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 1;
   min-height: 100vh;
   text-align: center;
@@ -137,6 +145,10 @@ main {
   align-content: start;
   grid-template-rows: auto auto auto minmax(0, 1fr);
   padding: 5vh var(--space-lg) 0;
+}
+
+.lamb-appears .lamb-text-block {
+  display: contents;
 }
 
 .lamb-appears h2 {
@@ -166,6 +178,11 @@ main {
   font-size: clamp(0.95rem, 1.4vw, 1.1rem);
 }
 
+.memory-word {
+  display: inline-block;
+  color: inherit;
+}
+
 .lamb-outline-svg {
   display: block;
   width: min(980px, 86vw);
@@ -184,7 +201,7 @@ main {
 
 @media (max-width: 900px) {
   .lamb-appears {
-    min-height: 170vh;
+    min-height: 128vh;
   }
 
   .lamb-appears .section__content {
