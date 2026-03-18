@@ -1,7 +1,81 @@
 console.log("Scrollytelling site loaded");
 
+const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+let scrollSmootherInstance = null;
+
+function prefersReducedMotion() {
+  return reducedMotionQuery.matches;
+}
+
+function markReducedMotionState() {
+  document.documentElement.classList.toggle("is-reduced-motion", prefersReducedMotion());
+}
+
 if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
+  if (typeof ScrollSmoother !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+  } else {
+    gsap.registerPlugin(ScrollTrigger);
+  }
+}
+
+function setupScrollSmoother() {
+  const smoothWrapper = document.querySelector("#smooth-wrapper");
+  const smoothContent = document.querySelector("#smooth-content");
+
+  if (!smoothWrapper || !smoothContent || prefersReducedMotion() || typeof ScrollSmoother === "undefined") {
+    if (scrollSmootherInstance) {
+      scrollSmootherInstance.kill();
+      scrollSmootherInstance = null;
+    }
+    return null;
+  }
+
+  if (scrollSmootherInstance) {
+    scrollSmootherInstance.kill();
+  }
+
+  scrollSmootherInstance = ScrollSmoother.create({
+    wrapper: smoothWrapper,
+    content: smoothContent,
+    smooth: 1.35,
+    smoothTouch: 0.12,
+    effects: true,
+    normalizeScroll: true
+  });
+
+  return scrollSmootherInstance;
+}
+
+function initMotionExperience() {
+  markReducedMotionState();
+  setupScrollSmoother();
+
+  if (prefersReducedMotion()) {
+    setupNightModeToggleButton();
+    return;
+  }
+
+  animateHeroFlames();
+  animateEventsHeadingOnScroll();
+  animateHeroText();
+  animateEventsBodyOnScroll();
+  animateVariablesHeadingOnScroll();
+  animateVariablesBodyOnScroll();
+  animateConditionalsTextOnScroll();
+  animateVariablesIconsOrbit();
+  setupRitualBlackMatter2Path();
+  animateRitualBlackMatter();
+  animateRitualBlackMatterFlames();
+  animateRitualBlackMatter2Flames();
+  animateRitualBlackMatterImage();
+  animateRitualEyeTracking();
+  animateDarkMatterTurbulence();
+  animateDarkMatterParallax();
+  animateStorageSectionOnScroll();
+  animateToggleSectionOnScroll();
+  setupNightModeToggleButton();
+  animateLambSectionOnScroll();
 }
 
 function animateHeroFlames() {
@@ -749,7 +823,7 @@ function setupNightModeToggleButton() {
 
     gsap.to(toggleKnob, {
       x: lightsOff ? 40 : 0,
-      duration: animate ? 0.6 : 0,
+      duration: animate && !prefersReducedMotion() ? 0.6 : 0,
       ease: "power2.inOut",
       overwrite: true
     });
@@ -757,7 +831,7 @@ function setupNightModeToggleButton() {
     if (toggleHighlightText) {
       gsap.to(toggleHighlightText, {
         color: lightsOff ? "var(--neutral-0)" : "var(--neutral-100)",
-        duration: animate ? 0.75 : 0,
+        duration: animate && !prefersReducedMotion() ? 0.75 : 0,
         ease: "power1.out",
         overwrite: true
       });
@@ -776,7 +850,7 @@ function setupNightModeToggleButton() {
 
     gsap.to(toggleButton, {
       scale: lightsOff ? 0.98 : 1,
-      duration: 0.32,
+      duration: prefersReducedMotion() ? 0 : 0.32,
       yoyo: true,
       repeat: 1,
       ease: "power1.inOut"
@@ -980,23 +1054,8 @@ function animateLambSectionOnScroll() {
   }
 }
 
-animateHeroFlames();
-animateEventsHeadingOnScroll();
-animateHeroText();
-animateEventsBodyOnScroll();
-animateVariablesHeadingOnScroll();
-animateVariablesBodyOnScroll();
-animateConditionalsTextOnScroll();
-animateVariablesIconsOrbit();
-setupRitualBlackMatter2Path();
-animateRitualBlackMatter();
-animateRitualBlackMatterFlames();
-animateRitualBlackMatter2Flames();
-animateRitualBlackMatterImage();
-animateRitualEyeTracking();
-animateDarkMatterTurbulence();
-animateDarkMatterParallax();
-animateStorageSectionOnScroll();
-animateToggleSectionOnScroll();
-setupNightModeToggleButton();
-animateLambSectionOnScroll();
+initMotionExperience();
+
+reducedMotionQuery.addEventListener("change", () => {
+  window.location.reload();
+});

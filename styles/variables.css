@@ -46,7 +46,7 @@
    SEMANTIC COLOR TOKENS
 ======================== */
 
---color-background-primary: var(--neutral-100);
+--color-background-primary: var(--red-300);
 --color-background-secondary: var(--neutral-600);
 
 --color-text-primary: var(--neutral-600);
