@@ -561,9 +561,21 @@ li {
   pointer-events: none;
 }
 
+.section--toggle.is-lights-off .cult-crown-wrap::after {
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--red-300) 62%, transparent) 0%,
+    color-mix(in srgb, var(--red-400) 42%, transparent) 42%,
+    color-mix(in srgb, var(--red-500) 18%, transparent) 68%,
+    transparent 88%
+  );
+  filter: blur(12px);
+  opacity: 0.96;
+}
+
 .night-mode-toggle {
   display: block;
-  width: min(var(--size-toggle), 55vw);
+  width: min(156px, 42vw);
   height: auto;
   overflow: visible;
   --toggle-track-color: var(--neutral-700);

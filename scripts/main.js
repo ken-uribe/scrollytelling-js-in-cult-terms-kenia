@@ -740,25 +740,39 @@ function setupNightModeToggleButton() {
 
   let lightsOff = rootElement.dataset.theme === "dark";
 
-  gsap.set(toggleKnob, {
-    transformOrigin: "50% 50%",
-    x: lightsOff ? 40 : 0
-  });
-
-  toggleSection.classList.toggle("is-lights-off", lightsOff);
-  toggleButton.setAttribute("aria-pressed", String(lightsOff));
-
-  toggleButton.addEventListener("click", () => {
-    lightsOff = !lightsOff;
+  function setNightModeState(nextLightsOff, options = {}) {
+    const { animate = true } = options;
+    lightsOff = nextLightsOff;
     toggleSection.classList.toggle("is-lights-off", lightsOff);
     rootElement.dataset.theme = lightsOff ? "dark" : "light";
     toggleButton.setAttribute("aria-pressed", String(lightsOff));
 
     gsap.to(toggleKnob, {
       x: lightsOff ? 40 : 0,
-      duration: 0.6,
-      ease: "power2.inOut"
+      duration: animate ? 0.6 : 0,
+      ease: "power2.inOut",
+      overwrite: true
     });
+
+    if (toggleHighlightText) {
+      gsap.to(toggleHighlightText, {
+        color: lightsOff ? "var(--neutral-0)" : "var(--neutral-100)",
+        duration: animate ? 0.75 : 0,
+        ease: "power1.out",
+        overwrite: true
+      });
+    }
+  }
+
+  gsap.set(toggleKnob, {
+    transformOrigin: "50% 50%",
+    x: lightsOff ? 40 : 0
+  });
+
+  setNightModeState(lightsOff, { animate: false });
+
+  toggleButton.addEventListener("click", () => {
+    setNightModeState(!lightsOff);
 
     gsap.to(toggleButton, {
       scale: lightsOff ? 0.98 : 1,
@@ -767,15 +781,18 @@ function setupNightModeToggleButton() {
       repeat: 1,
       ease: "power1.inOut"
     });
-
-    if (toggleHighlightText) {
-      gsap.to(toggleHighlightText, {
-        color: lightsOff ? "var(--neutral-0)" : "var(--neutral-100)",
-        duration: 0.75,
-        ease: "power1.out"
-      });
-    }
   });
+
+  if (typeof ScrollTrigger !== "undefined") {
+    ScrollTrigger.create({
+      trigger: toggleSection,
+      start: "top bottom",
+      end: "bottom top",
+      onLeaveBack: () => {
+        setNightModeState(false, { animate: true });
+      }
+    });
+  }
 }
 
 animateHeroFlames();
